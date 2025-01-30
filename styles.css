@@ -1,9 +1,87 @@
-body {
-	margin: 1rem;
+:root {
+	--off-white: #dcdcdc;
 }
 
-header {
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 1rem;
+	background: #1c1c1c;
+	color: var(--off-white);
+	overflow-x: hidden;
+}
+
+.header-container {
 	margin-bottom: 2rem;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.header-title {
+	font-size: 3rem;
+	line-height: 1.2;
+	margin-bottom: 1rem;
+	position: relative;
+	cursor: default;
+}
+
+.header-title span {
+	display: inline-block;
+	transition: transform, opacity, filter;
+	transition-duration: 0.9s;
+	transition-timing-function: ease-in-out
+}
+
+.not {
+	font-size: 4rem;
+	opacity: 0;
+	filter: blur(5px);
+}
+
+/* move left */
+.header-title:hover .seeing {
+	transform: translateX(-1rem);
+}
+
+/* move right */
+.header-title:hover .believing {
+	transform: translateX(1rem);
+}
+
+/* show on hover */
+.header-title:hover .not {
+	opacity: 1;
+	filter: blur(0);
+	color: darkred;
+	/* font-family: velzyland; */
+}
+
+.header-description {
+	font-size: 1.2rem;
+	margin-bottom: 2rem;
+	cursor: default;
+}
+
+.scroll {
+	font-size: 1.5rem;
+	position: absolute;
+	bottom: 5rem;
+	cursor: default;
 }
 
 img {
@@ -14,4 +92,9 @@ img {
 .block {
 	margin-top: 1rem;
 	margin-bottom: 1rem;
+}
+
+footer {
+	display: flex;
+	justify-content: space-around;
 }
