@@ -75,7 +75,7 @@ body {
 	opacity: 1;
 	filter: blur(0);
 	color: darkred;
-	transition: 1s ease-in-out;
+	transition: 1s ease;
 }
 
 .header-description {
@@ -100,6 +100,7 @@ body {
 }
 
 .block {
+	position: relative;
 	margin-top: 1rem;
 	margin-bottom: 1rem;
 	width: 10rem;
@@ -108,21 +109,53 @@ body {
 	overflow: hidden;
 }
 
-/* CSS only applies to block with paragraph element */
 .block p {
-	height: -webkit-fill-available;
-	padding: 1rem;
 	display: flex;
 	align-items: center;
-	border: 5px solid white;
 	border-radius: 10px;
 	overflow: hidden;
 }
 
+/* CSS only applies to paragraph with immmediate parent as .block */
+.block > p {
+	height: -webkit-fill-available;
+	padding: 1rem;
+	border: 5px solid white;
+}
+
 /* fit parent container */
-img {
+.block img {
 	height: 100%;
 	width: 100%;
+}
+
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	opacity: 0;
+	transition: .8s ease;
+
+	/* very cool, just learned about this property */
+	backdrop-filter: blur(0px);
+}
+
+.block:hover .overlay {
+	opacity: 1;
+	backdrop-filter: blur(.5rem);
+}
+
+.overlay-title {
+	margin-bottom: 1rem;
+	font-weight: bold;
+	font-size: 1.25rem;
 }
 
 footer {
