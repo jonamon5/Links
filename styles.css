@@ -91,6 +91,38 @@ body {
 	cursor: default;
 }
 
+.buttons {
+	display: flex;
+	gap: 2rem;
+}
+
+.buttons p {
+	margin-top: 5rem;
+	padding: 1rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	border-radius: 1rem;
+	transition: .5s ease;
+}
+
+.enter-button {
+	border: 2px solid darkgreen;
+}
+
+.leave-button {
+	border: 2px solid darkred;
+}
+
+.enter-button:hover {
+	background-color: darkgreen;
+	color: white;
+}
+
+.leave-button:hover {
+	background-color: darkred;
+	color: white;
+}
+
 .block-container {
 	display: flex;
 	flex-wrap: wrap;
@@ -117,7 +149,7 @@ body {
 }
 
 /* CSS only applies to paragraph with immmediate parent as .block */
-.block>p {
+.block > p {
 	height: -webkit-fill-available;
 	padding: 1rem;
 	border: 5px solid white;
