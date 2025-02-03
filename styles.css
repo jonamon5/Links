@@ -96,7 +96,7 @@ body {
 	gap: 2rem;
 }
 
-.buttons p {
+.buttons a {
 	margin-top: 5rem;
 	padding: 1rem;
 	padding-left: 2rem;
@@ -126,18 +126,21 @@ body {
 .block-container {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 2rem;
-	margin: 1rem;
-	justify-content: center;
+	/* gap: 2rem; */
+	/* margin: 1rem; */
+	/* justify-content: center; */
 }
 
 .block {
 	position: relative;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
-	width: 20rem;
-	height: 20rem;
-	border-radius: 10px;
+	/* margin-top: 1rem; */
+	/* margin-bottom: 1rem; */
+	/* width: 20rem;
+	height: 20rem; */
+	/* border-radius: 10px; */
+
+	width: fit-content;
+	height: fit-content;
 	overflow: hidden;
 }
 
