@@ -8,7 +8,8 @@ markdownIt.src = 'https://cdn.jsdelivr.net/npm/markdown-it@14.0.0/dist/markdown-
 document.head.appendChild(markdownIt)
 
 // Okay, Are.na stuff!
-let channelSlug = 'illusion-v0vgfx61y_e' // The “slug” is just the end of the URL
+let channelSlug = 'illusion-v0vgfx61y_e' 
+// let channelSlug = 'philosophers-cave'
 
 
 // First, let’s lay out some *functions*, starting with our basic metadata:
@@ -33,7 +34,8 @@ let renderBlock = (block) => {
 	let channelBlocks = document.getElementById('channel-blocks')
 
 	console.log("BLOCK", block)
-
+	// block = 1 piece of content
+	
 	// Links!
 	if (block.class == 'Link') {
 		let linkItem =
@@ -160,6 +162,7 @@ let renderBlock = (block) => {
 
 	const divCount = document.querySelectorAll('div').length;
 	console.log(divCount + " blocks rendered");
+
 }
 
 
@@ -184,7 +187,6 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 	.then((response) => response.json()) // Return it as JSON data
 	.then((data) => { // Do stuff with the data
 		console.log("Data", data) // Always good to check your response!
-		console.log("Single Obj", data.contents[40]) // single ob
 		placeChannelInfo(data) // Pass the data to the first function
 
 		// Loop through the `contents` array (list), backwards. Are.na returns them in reverse!
