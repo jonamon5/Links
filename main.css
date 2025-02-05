@@ -1,9 +1,10 @@
 .block-container {
 	display: flex;
 	flex-wrap: wrap;
+	gap: 1rem;
 }
 
-.block {
+.block > div {
 	position: relative;
 	width: fit-content;
 	height: fit-content;

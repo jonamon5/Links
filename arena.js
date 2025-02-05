@@ -1,6 +1,8 @@
 // This allows us to process/render the descriptions, which are in Markdown!
 // More about Markdown: https://en.wikipedia.org/wiki/Markdown
 
+// https://api.are.na/v2/channels/illusion-v0vgfx61y_e
+
 let markdownIt = document.createElement('script')
 markdownIt.src = 'https://cdn.jsdelivr.net/npm/markdown-it@14.0.0/dist/markdown-it.min.js'
 document.head.appendChild(markdownIt)
@@ -9,7 +11,6 @@ document.head.appendChild(markdownIt)
 
 // Okay, Are.na stuff!
 let channelSlug = 'illusion-v0vgfx61y_e' // The “slug” is just the end of the URL
-
 
 
 // First, let’s lay out some *functions*, starting with our basic metadata:
@@ -38,29 +39,39 @@ let renderBlock = (block) => {
 	if (block.class == 'Link') {
 		let linkItem =
 			`
-			<li>
+			<div>
 				<p><em>Link</em></p>
 				<picture>
-					<source media="(max-width: 428px)" srcset="${ block.image.thumb.url }">
-					<source media="(max-width: 640px)" srcset="${ block.image.large.url }">
+					<source srcset="${ block.image.thumb.url }">
+					<source srcset="${ block.image.large.url }">
 					<img src="${ block.image.original.url }">
 				</picture>
 				<h3>${ block.title }</h3>
 				${ block.description_html }
 				<p><a href="${ block.source.url }">See the original ↗</a></p>
-			</li>
+			</div>
 			`
 		channelBlocks.insertAdjacentHTML('beforeend', linkItem)
 	}
 
 	// Images!
-	else if (block.class == 'Image') {
-		// …up to you!
+	else if (block.class == 'image') {
+    `
+    <div>
+      <p><em>Images</em></p>
+      <video controls src="${ block.original.url }"></video>
+    </ldiv>
+    `
 	}
 
 	// Text!
 	else if (block.class == 'Text') {
-		// …up to you!
+    `
+    <div>
+      <p><em>Video</em></p>
+      <video controls src="${ block.attachment.url }"></video>
+    </div>
+    `
 	}
 
 	// Uploaded (not linked) media…
@@ -72,10 +83,10 @@ let renderBlock = (block) => {
 			// …still up to you, but we’ll give you the `video` element:
 			let videoItem =
 				`
-				<li>
+				<div>
 					<p><em>Video</em></p>
 					<video controls src="${ block.attachment.url }"></video>
-				</li>
+				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', videoItem)
 			// More on video, like the `autoplay` attribute:
@@ -92,10 +103,10 @@ let renderBlock = (block) => {
 			// …still up to you, but here’s an `audio` element:
 			let audioItem =
 				`
-				<li>
+				<div>
 					<p><em>Audio</em></p>
 					<audio controls src="${ block.attachment.url }"></video>
-				</li>
+				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', audioItem)
 			// More on audio: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio
@@ -111,10 +122,10 @@ let renderBlock = (block) => {
 			// …still up to you, but here’s an example `iframe` element:
 			let linkedVideoItem =
 				`
-				<li>
+				<div>
 					<p><em>Linked Video</em></p>
 					${ block.embed.html }
-				</li>
+				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', linkedVideoItem)
 			// More on iframe: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe
