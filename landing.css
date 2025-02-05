@@ -1,0 +1,138 @@
+.header-container {
+	/* margin-bottom: 2rem; */
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	animation: fadeIn 1.5s ease-in-out;
+	z-index: 0;
+
+	/* gif background - can dynamically change later with API call */
+	/* background: url("https://d2w9rnfcy7mm78.cloudfront.net/34050447/original_78ff05ccc8f87bbc80ef15442b656cd1.gif?1738039174?bc=0") no-repeat center center; */
+	/* background-size: cover; */
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.header-title {
+	font-size: 3rem;
+	line-height: 1.2;
+	margin-bottom: 1rem;
+	position: relative;
+	cursor: default;
+	transition: 1s ease-in-out;
+	filter: brightness(.5);
+}
+
+.header-title span {
+	display: inline-block;
+	transition: transform, opacity, filter;
+	transition-duration: 0.9s;
+	transition-timing-function: ease-in-out
+}
+
+.not {
+	font-size: 4rem;
+	opacity: 0;
+	filter: blur(5px);
+	font-family: velzyland;
+	transition: 1s ease-in-out;
+}
+
+/* move left */
+.header-title:hover .seeing {
+	transform: translateX(-1rem);
+}
+
+/* move right */
+.header-title:hover .believing {
+	transform: translateX(1rem);
+}
+
+/* show on hover */
+.header-title:hover .not {
+	opacity: 1;
+	filter: blur(0);
+	color: darkred;
+	transition: 1s ease;
+}
+
+.header-description {
+	font-size: 1.2rem;
+	margin-bottom: 2rem;
+	cursor: default;
+	filter: brightness(.5);
+}
+
+.scroll {
+	font-size: 1.5rem;
+	position: absolute;
+	bottom: 5rem;
+	cursor: default;
+}
+
+.buttons {
+	display: flex;
+	gap: 2rem;
+}
+
+.buttons a {
+	margin-top: 5rem;
+	padding: 1rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	border-radius: 1rem;
+	transition: .5s ease;
+}
+
+.enter-button {
+	border: 2px solid darkgreen;
+	color: darkgreen;
+}
+
+.leave-button {
+	border: 2px solid darkred;
+	color: darkred;
+}
+
+.enter-button:hover {
+	background-color: darkgreen;
+	color: dark;
+}
+
+.leave-button:hover {
+	background-color: darkred;
+	color: white;
+}
+
+.checkerboard-container {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background: url("https://openclipart.org/image/2000px/276846") center center / cover no-repeat;
+	z-index: 0;
+}
+
+/* The checkerboard grid overlay */
+.checkerboard {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: grid;
+	grid-template-columns: repeat(20, 1fr); /* 20x20 for example */
+	grid-template-rows: repeat(20, 1fr);
+	z-index: 0;
+  }

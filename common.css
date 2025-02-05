@@ -1,0 +1,9 @@
+:root {
+	--off-white: #dcdcdc;
+}
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background: #1c1c1c;
+	color: var(--off-white);
+	overflow-x: hidden;
+}

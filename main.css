@@ -1,0 +1,120 @@
+.block-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.block {
+	position: relative;
+	width: fit-content;
+	height: fit-content;
+	overflow: hidden;
+}
+
+.block p {
+	display: flex;
+	align-items: center;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+/* CSS only applies to paragraph with immmediate parent as .block */
+.block > p {
+	height: -webkit-fill-available;
+	padding: 1rem;
+	border: 5px solid white;
+}
+
+/* fit parent container */
+.block img {
+	height: 100%;
+	width: 100%;
+}
+
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	opacity: 0;
+	transition: .8s ease;
+
+	/* very cool, just learned about this property */
+	backdrop-filter: blur(0px);
+}
+
+.block:hover .overlay {
+	opacity: 1;
+	backdrop-filter: blur(.5rem);
+}
+
+.overlay-title {
+	margin-bottom: 1rem;
+	font-weight: bold;
+	font-size: 1.25rem;
+}
+
+footer {
+	display: flex;
+	justify-content: space-around;
+	gap: 1rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
+	text-align: center;
+}
+
+/* Less than 700px */
+@media (max-width: 700px) {
+	.block {
+		width: 15rem;
+		height: 15rem;
+	}
+}
+
+/* Less than 600px */
+@media (max-width: 600px) {
+	.header-title {
+		font-size: 2rem;
+	}
+
+	.not {
+		font-size: 2.5rem;
+		opacity: 1;
+		filter: blur(0);
+		color: darkred;
+	}
+
+	.seeing {
+		transform: translateX(-1rem);
+	}
+
+	.believing {
+		transform: translateX(1rem);
+	}
+}
+
+/* Less than 400px */
+@media (max-width: 400px) {
+	footer {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.header-title {
+		font-size: 1.5rem;
+	}
+
+	.not {
+		font-size: 2rem;
+	}
+
+	.header-description {
+		font-size: 1rem;
+	}
+}
