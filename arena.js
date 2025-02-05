@@ -24,8 +24,6 @@ let placeChannelInfo = (data) => {
 	channelDescription.innerHTML = window.markdownit().render(data.metadata.description) // Converts Markdown → HTML
 	channelCount.innerHTML = data.length
 	channelLink.href = `https://www.are.na/channel/${channelSlug}`
-
-	// console.log("placeChannelInfo", data)
 }
 
 
@@ -40,15 +38,10 @@ let renderBlock = (block) => {
 	if (block.class == 'Link') {
 		let linkItem =
 			`
-			<div>
-				<p><em>Link</em></p>
-				<picture>
-					<source srcset="${block.image.thumb.url}">
-					<source srcset="${block.image.large.url}">
-					<img src="${block.image.original.url}">
-				</picture>
-				<h3>${block.title}</h3>
-				${block.description_html}
+			<div class="block">
+				<img src="${block.image.original.url}">
+				<p>${block.title}</p>
+				<p>${block.description_html}</p>
 				<p><a href="${block.source.url}">See the original ↗</a></p>
 			</div>
 			`
@@ -61,19 +54,17 @@ let renderBlock = (block) => {
 
 	else if (block.class == 'Image') {
 		let imageItem = `
-		<div class="image-block">
-		  <p><em>Image</em></p>
-		  <h3>${block.title}</h3>
-		  <p>${block.description}</p>
+		<div class="block">
 		  <img src="${block.image.original.url}">
+
+		  <div class="overlay">
+			<p>${block.title}</p>
+			<p>${block.description}</p>
+		</div>
 		</div>
 		`;
 		
-		channelBlocks.insertAdjacentHTML('beforeend', imageItem);
-
-		console.log('title', block.title);
-		console.log('description', block.description);
-		console.log('image url', block.image.original.url);
+		channelBlocks.insertAdjacentHTML('beforeend', imageItem);;
 
 	}
 	
@@ -81,12 +72,10 @@ let renderBlock = (block) => {
 	// Text!
 	else if (block.class == 'Text') {
 		let textItem = `
-    <div class="video-div"> 
-      <p><em>Video</em></p>
-      <p src="${block.text}"></p>
-    </div>
-    `
-
+		<div class="block"> 
+		<p src="${block.text}"></p>
+		</div>
+		`;
 	channelBlocks.insertAdjacentHTML('beforeend', textItem);
 	console.log('text')
 	}
@@ -100,14 +89,11 @@ let renderBlock = (block) => {
 			// …still up to you, but we’ll give you the `video` element:
 			let videoItem =
 				`
-				<div>
-					<p><em>Video</em></p>
+				<div class="block">
 					<video controls autoplay src="${block.attachment.url}"></video>
 				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', videoItem)
-			// More on video, like the `autoplay` attribute:
-			// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video
 		}
 
 		// Uploaded PDFs!
@@ -120,18 +106,15 @@ let renderBlock = (block) => {
 			// …still up to you, but here’s an `audio` element:
 			let audioItem =
 				`
-				<div>
-					<p><em>Audio</em></p>
-					<audio controls src="${block.attachment.url}"></video>
+				<div class="block">
+					<audio controls src="${block.attachment.url}"></audio>
 				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', audioItem)
 			// More on audio: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio
 
-			console.log('audio')
 		}
 
-		console.log('attachment')
 	}
 
 	// Linked media…
@@ -143,8 +126,7 @@ let renderBlock = (block) => {
 			// …still up to you, but here’s an example `iframe` element:
 			let linkedVideoItem =
 				`
-				<div>
-					<p><em>Linked Video</em></p>
+				<div class="block">
 					${block.embed.html}
 				</div>
 				`
@@ -154,10 +136,26 @@ let renderBlock = (block) => {
 
 		// Linked audio!
 		else if (embed.includes('rich')) {
-			// …up to you!
+			let richItem =
+			`
+			<div class="block">
+				<audio controls src="${block.rich.url}"></video>
+			</div>
+			`
+			channelBlocks.insertAdjacentHTML('beforeend', richItem)
 		}
 
 		console.log('media')
+	}
+
+	else if (block.class == 'undefined') {
+		let undefined =
+		`
+		<div class="block">
+		<p> Undefined </p>
+		</div>
+		`
+		channelBlocks.insertAdjacentHTML('beforeend', undefined)
 	}
 
 	const divCount = document.querySelectorAll('div').length;
@@ -176,7 +174,7 @@ let renderUser = (user, container) => { // You can have multiple arguments for a
 			<p><a href="https://are.na/${user.slug}">Are.na profile ↗</a></p>
 		</address>
 		`
-	// container.insertAdjacentHTML('beforeend', userAddress)
+	container.insertAdjacentHTML('beforeend', userAddress)
 }
 
 

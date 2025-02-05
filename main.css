@@ -1,6 +1,7 @@
 :root {
 	--off-white: #dcdcdc;
 }
+
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	background: #1c1c1c;
@@ -19,11 +20,20 @@ Header {
 	gap: 1rem;
 }
 
-.block-container > div {
+.block {
 	position: relative;
 	width: 10rem;
-	height: fit-content;
+	height: 10rem;
+	aspect-ratio: 1/1;
 	overflow: hidden;
+	justify-content: center;
+	align-content: center;
+}
+
+/* fit parent container */
+.block img {
+	height: 100%;
+	width: 100%;
 }
 
 .block p {
@@ -33,6 +43,11 @@ Header {
 	overflow: hidden;
 }
 
+.block audio {
+	width: -webkit-fill-available;
+	height: -webkit-fill-available;
+}
+
 /* CSS only applies to paragraph with immmediate parent as .block */
 .block > p {
 	height: -webkit-fill-available;
@@ -40,11 +55,6 @@ Header {
 	border: 5px solid white;
 }
 
-/* fit parent container */
-.block img {
-	height: 100%;
-	width: 100%;
-}
 
 .overlay {
 	position: absolute;
