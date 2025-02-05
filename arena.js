@@ -7,8 +7,6 @@ let markdownIt = document.createElement('script')
 markdownIt.src = 'https://cdn.jsdelivr.net/npm/markdown-it@14.0.0/dist/markdown-it.min.js'
 document.head.appendChild(markdownIt)
 
-
-
 // Okay, Are.na stuff!
 let channelSlug = 'illusion-v0vgfx61y_e' // The “slug” is just the end of the URL
 
@@ -26,14 +24,17 @@ let placeChannelInfo = (data) => {
 	channelDescription.innerHTML = window.markdownit().render(data.metadata.description) // Converts Markdown → HTML
 	channelCount.innerHTML = data.length
 	channelLink.href = `https://www.are.na/channel/${channelSlug}`
-}
 
+	// console.log("placeChannelInfo", data)
+}
 
 
 // Then our big function for specific-block-type rendering:
 let renderBlock = (block) => {
 	// To start, a shared `ul` where we’ll insert all our blocks
 	let channelBlocks = document.getElementById('channel-blocks')
+
+	console.log("BLOCK", block)
 
 	// Links!
 	if (block.class == 'Link') {
@@ -42,36 +43,52 @@ let renderBlock = (block) => {
 			<div>
 				<p><em>Link</em></p>
 				<picture>
-					<source srcset="${ block.image.thumb.url }">
-					<source srcset="${ block.image.large.url }">
-					<img src="${ block.image.original.url }">
+					<source srcset="${block.image.thumb.url}">
+					<source srcset="${block.image.large.url}">
+					<img src="${block.image.original.url}">
 				</picture>
-				<h3>${ block.title }</h3>
-				${ block.description_html }
-				<p><a href="${ block.source.url }">See the original ↗</a></p>
+				<h3>${block.title}</h3>
+				${block.description_html}
+				<p><a href="${block.source.url}">See the original ↗</a></p>
 			</div>
 			`
 		channelBlocks.insertAdjacentHTML('beforeend', linkItem)
+
+		console.log('link')
 	}
 
 	// Images!
-	else if (block.class == 'image') {
-    `
-    <div>
-      <p><em>Images</em></p>
-      <video controls src="${ block.original.url }"></video>
-    </ldiv>
-    `
+
+	else if (block.class == 'Image') {
+		let imageItem = `
+		<div class="image-block">
+		  <p><em>Image</em></p>
+		  <h3>${block.title}</h3>
+		  <p>${block.description}</p>
+		  <img src="${block.image.original.url}">
+		</div>
+		`;
+		
+		channelBlocks.insertAdjacentHTML('beforeend', imageItem);
+
+		console.log('title', block.title);
+		console.log('description', block.description);
+		console.log('image url', block.image.original.url);
+
 	}
+	
 
 	// Text!
 	else if (block.class == 'Text') {
-    `
-    <div>
+		let textItem = `
+    <div class="video-div"> 
       <p><em>Video</em></p>
-      <video controls src="${ block.attachment.url }"></video>
+      <p src="${block.text}"></p>
     </div>
     `
+
+	channelBlocks.insertAdjacentHTML('beforeend', textItem);
+	console.log('text')
 	}
 
 	// Uploaded (not linked) media…
@@ -85,7 +102,7 @@ let renderBlock = (block) => {
 				`
 				<div>
 					<p><em>Video</em></p>
-					<video controls src="${ block.attachment.url }"></video>
+					<video controls autoplay src="${block.attachment.url}"></video>
 				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', videoItem)
@@ -105,12 +122,16 @@ let renderBlock = (block) => {
 				`
 				<div>
 					<p><em>Audio</em></p>
-					<audio controls src="${ block.attachment.url }"></video>
+					<audio controls src="${block.attachment.url}"></video>
 				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', audioItem)
 			// More on audio: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio
+
+			console.log('audio')
 		}
+
+		console.log('attachment')
 	}
 
 	// Linked media…
@@ -124,7 +145,7 @@ let renderBlock = (block) => {
 				`
 				<div>
 					<p><em>Linked Video</em></p>
-					${ block.embed.html }
+					${block.embed.html}
 				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', linkedVideoItem)
@@ -135,7 +156,12 @@ let renderBlock = (block) => {
 		else if (embed.includes('rich')) {
 			// …up to you!
 		}
+
+		console.log('media')
 	}
+
+	const divCount = document.querySelectorAll('div').length;
+	console.log(divCount + " blocks rendered");
 }
 
 
@@ -145,12 +171,12 @@ let renderUser = (user, container) => { // You can have multiple arguments for a
 	let userAddress =
 		`
 		<address>
-			<img src="${ user.avatar_image.display }">
-			<h3>${ user.first_name }</h3>
-			<p><a href="https://are.na/${ user.slug }">Are.na profile ↗</a></p>
+			<img src="${user.avatar_image.display}">
+			<h3>${user.first_name}</h3>
+			<p><a href="https://are.na/${user.slug}">Are.na profile ↗</a></p>
 		</address>
 		`
-	container.insertAdjacentHTML('beforeend', userAddress)
+	// container.insertAdjacentHTML('beforeend', userAddress)
 }
 
 
@@ -159,7 +185,8 @@ let renderUser = (user, container) => { // You can have multiple arguments for a
 fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-store' })
 	.then((response) => response.json()) // Return it as JSON data
 	.then((data) => { // Do stuff with the data
-		console.log(data) // Always good to check your response!
+		console.log("Data", data) // Always good to check your response!
+		console.log("Single Obj", data.contents[40]) // single ob
 		placeChannelInfo(data) // Pass the data to the first function
 
 		// Loop through the `contents` array (list), backwards. Are.na returns them in reverse!

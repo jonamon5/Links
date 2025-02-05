@@ -1,12 +1,27 @@
+:root {
+	--off-white: #dcdcdc;
+}
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background: #1c1c1c;
+	color: var(--off-white);
+}
+
+Header {
+	display: flex;
+	justify-content: space-evenly;
+	margin: 1rem;
+}
+
 .block-container {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1rem;
 }
 
-.block > div {
+.block-container > div {
 	position: relative;
-	width: fit-content;
+	width: 10rem;
 	height: fit-content;
 	overflow: hidden;
 }
@@ -50,6 +65,7 @@
 	backdrop-filter: blur(0px);
 }
 
+
 .block:hover .overlay {
 	opacity: 1;
 	backdrop-filter: blur(.5rem);
@@ -68,54 +84,4 @@ footer {
 	margin-left: 1rem;
 	margin-right: 1rem;
 	text-align: center;
-}
-
-/* Less than 700px */
-@media (max-width: 700px) {
-	.block {
-		width: 15rem;
-		height: 15rem;
-	}
-}
-
-/* Less than 600px */
-@media (max-width: 600px) {
-	.header-title {
-		font-size: 2rem;
-	}
-
-	.not {
-		font-size: 2.5rem;
-		opacity: 1;
-		filter: blur(0);
-		color: darkred;
-	}
-
-	.seeing {
-		transform: translateX(-1rem);
-	}
-
-	.believing {
-		transform: translateX(1rem);
-	}
-}
-
-/* Less than 400px */
-@media (max-width: 400px) {
-	footer {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.header-title {
-		font-size: 1.5rem;
-	}
-
-	.not {
-		font-size: 2rem;
-	}
-
-	.header-description {
-		font-size: 1rem;
-	}
 }
