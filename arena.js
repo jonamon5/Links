@@ -8,7 +8,7 @@ markdownIt.src = 'https://cdn.jsdelivr.net/npm/markdown-it@14.0.0/dist/markdown-
 document.head.appendChild(markdownIt)
 
 // Okay, Are.na stuff!
-let channelSlug = 'illusion-v0vgfx61y_e' 
+let channelSlug = 'illusion-v0vgfx61y_e'
 
 
 // First, let’s lay out some *functions*, starting with our basic metadata:
@@ -34,17 +34,19 @@ let renderBlock = (block) => {
 
 	// console.log("BLOCK", block)
 	// block = 1 piece of content
-	
+
 	// Links!
 	if (block.class == 'Link') {
 		let linkItem =
 			`
-			<div class="block">
-				<img src="${block.image.original.url}">
-				<p>${block.title}</p>
-				<p>${block.description_html}</p>
-				<p><a href="${block.source.url}">See the original ↗</a></p>
-			</div>
+		<div class="block">
+		  <img src="${block.image.original.url}">
+
+		  <div class="overlay">
+			<p>${block.title}</p>
+			<p>${block.description}</p>
+		</div>
+		</div>
 			`
 		channelBlocks.insertAdjacentHTML('beforeend', linkItem)
 
@@ -64,21 +66,22 @@ let renderBlock = (block) => {
 		</div>
 		</div>
 		`;
-		
+
 		channelBlocks.insertAdjacentHTML('beforeend', imageItem);;
 
 	}
-	
+
 
 	// Text!
 	else if (block.class == 'Text') {
 		let textItem = `
-		<div class="block"> 
-		<p src="${block.text}"></p>
+		<div class="block">
+			<p>${block.content}</p>
+			<p>${block.description_html}</p>
 		</div>
 		`;
-	channelBlocks.insertAdjacentHTML('beforeend', textItem);
-	console.log('text')
+		channelBlocks.insertAdjacentHTML('beforeend', textItem);
+		console.log('text')
 	}
 
 	// Uploaded (not linked) media…
@@ -92,6 +95,10 @@ let renderBlock = (block) => {
 				`
 				<div class="block">
 					<video controls autoplay src="${block.attachment.url}"></video>
+					<div class="overlay">
+						<p>${block.title}</p>
+						<p>${block.description}</p>
+					</div>
 				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', videoItem)
@@ -138,7 +145,7 @@ let renderBlock = (block) => {
 		// Linked audio!
 		else if (embed.includes('rich')) {
 			let richItem =
-			`
+				`
 			<div class="block">
 				<audio controls src="${block.rich.url}"></video>
 			</div>
@@ -149,19 +156,15 @@ let renderBlock = (block) => {
 		console.log('media')
 	}
 
-	else if (block.src == 'undefined') {
-		let undefined =
-		`
-		<div class="block">
-		<p> Undefined </p>
-		</div>
-		`
-		channelBlocks.insertAdjacentHTML('beforeend', undefined)
-	}
-
-	// const divCount = document.querySelectorAll('div').length;
-	// console.log(divCount + " blocks rendered");
-
+	// else if (block.src == 'undefined') {
+	// 	let undefined =
+	// 		`
+	// 	<div class="block">
+	// 	<p> Content on break </p>
+	// 	</div>
+	// 	`
+	// 	channelBlocks.insertAdjacentHTML('beforeend', undefined)
+	// }
 }
 
 
@@ -171,9 +174,9 @@ let renderUser = (user, container) => { // You can have multiple arguments for a
 	let userAddress =
 		`
 		<address>
-			<img src="${ user.avatar_image.display }">
-			<h3>${ user.first_name }</h3>
-			<p><a href="https://are.na/${ user.slug }">Are.na profile ↗</a></p>
+			<img src="${user.avatar_image.display}">
+			<h3>${user.first_name}</h3>
+			<p><a href="https://are.na/${user.slug}">Are.na profile ↗</a></p>
 		</address>
 		`
 	container.insertAdjacentHTML('beforeend', userAddress)
