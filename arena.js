@@ -9,7 +9,6 @@ document.head.appendChild(markdownIt)
 
 // Okay, Are.na stuff!
 let channelSlug = 'illusion-v0vgfx61y_e' 
-// let channelSlug = 'philosophers-cave'
 
 
 // First, let’s lay out some *functions*, starting with our basic metadata:
@@ -33,7 +32,7 @@ let renderBlock = (block) => {
 	// To start, a shared `ul` where we’ll insert all our blocks
 	let channelBlocks = document.getElementById('channel-blocks')
 
-	console.log("BLOCK", block)
+	// console.log("BLOCK", block)
 	// block = 1 piece of content
 	
 	// Links!
@@ -150,7 +149,7 @@ let renderBlock = (block) => {
 		console.log('media')
 	}
 
-	else if (block.class == 'undefined') {
+	else if (block.src == 'undefined') {
 		let undefined =
 		`
 		<div class="block">
@@ -160,8 +159,8 @@ let renderBlock = (block) => {
 		channelBlocks.insertAdjacentHTML('beforeend', undefined)
 	}
 
-	const divCount = document.querySelectorAll('div').length;
-	console.log(divCount + " blocks rendered");
+	// const divCount = document.querySelectorAll('div').length;
+	// console.log(divCount + " blocks rendered");
 
 }
 
@@ -172,13 +171,14 @@ let renderUser = (user, container) => { // You can have multiple arguments for a
 	let userAddress =
 		`
 		<address>
-			<img src="${user.avatar_image.display}">
-			<h3>${user.first_name}</h3>
-			<p><a href="https://are.na/${user.slug}">Are.na profile ↗</a></p>
+			<img src="${ user.avatar_image.display }">
+			<h3>${ user.first_name }</h3>
+			<p><a href="https://are.na/${ user.slug }">Are.na profile ↗</a></p>
 		</address>
 		`
 	container.insertAdjacentHTML('beforeend', userAddress)
 }
+
 
 
 

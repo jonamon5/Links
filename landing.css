@@ -1,6 +1,8 @@
-.header-container {
-	/* margin-bottom: 2rem; */
-	position: relative;
+.overlay-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -8,11 +10,8 @@
 	width: 100vw;
 	height: 100vh;
 	animation: fadeIn 1.5s ease-in-out;
-	z-index: 0;
-
-	/* gif background - can dynamically change later with API call */
-	/* background: url("https://d2w9rnfcy7mm78.cloudfront.net/34050447/original_78ff05ccc8f87bbc80ef15442b656cd1.gif?1738039174?bc=0") no-repeat center center; */
-	/* background-size: cover; */
+	z-index: 1;
+	/* pointer-events: none; */
 }
 
 @keyframes fadeIn {
@@ -32,7 +31,8 @@
 	position: relative;
 	cursor: default;
 	transition: 1s ease-in-out;
-	filter: brightness(.5);
+	text-shadow: rgba(0, 0, 0, 0.6) 10px 0 10px;
+	color: white; /* Ensures visibility */
 }
 
 .header-title span {
@@ -85,6 +85,7 @@
 .buttons {
 	display: flex;
 	gap: 2rem;
+	pointer-events: auto;
 }
 
 .buttons a {
@@ -121,7 +122,6 @@
 	width: 100vw;
 	height: 100vh;
 	background: url("https://openclipart.org/image/2000px/276846") center center / cover no-repeat;
-	z-index: 0;
 }
 
 /* The checkerboard grid overlay */

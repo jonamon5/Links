@@ -22,8 +22,8 @@ Header {
 
 .block {
 	position: relative;
-	width: 10rem;
-	height: 10rem;
+	width: 20rem;
+	height: 20rem;
 	aspect-ratio: 1/1;
 	overflow: hidden;
 	justify-content: center;
@@ -46,13 +46,14 @@ Header {
 .block audio {
 	width: -webkit-fill-available;
 	height: -webkit-fill-available;
+	border: 1px solid white;
 }
 
 /* CSS only applies to paragraph with immmediate parent as .block */
 .block > p {
 	height: -webkit-fill-available;
 	padding: 1rem;
-	border: 5px solid white;
+	border: 1px solid white;
 }
 
 
