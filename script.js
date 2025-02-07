@@ -2,7 +2,7 @@
 let checkerboard = document.getElementById("checkerboard");
 let rows = 20;
 let cols = 20;
-let threshold = 2; // How many times we want to switch before it stops switching
+let threshold = 1; // How many times we want to switch before it stops switching
 let cells = []; // single checkerboard cell
 let count = []; // How many times its been interacted with 
 
