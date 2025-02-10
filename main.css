@@ -112,3 +112,21 @@ footer {
 	margin-right: 1rem;
 	text-align: center;
 }
+
+/* MEDIA QUERY */
+/* MEDIA QUERY */
+/* MEDIA QUERY */
+
+@media (max-width: 1000px) {
+	.block {
+		width: 15rem;
+		height: 15rem;
+	}
+}
+
+  @media (max-width: 752px) {
+	.block {
+		width: 12rem;
+		height: 12rem;
+	}
+}

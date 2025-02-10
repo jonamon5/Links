@@ -156,18 +156,7 @@ let renderBlock = (block) => {
 		console.log('media')
 	}
 
-	// else if (block.src == 'undefined') {
-	// 	let undefined =
-	// 		`
-	// 	<div class="block">
-	// 	<p> Content on break </p>
-	// 	</div>
-	// 	`
-	// 	channelBlocks.insertAdjacentHTML('beforeend', undefined)
-	// }
 }
-
-
 
 // It‘s always good to credit your work:
 let renderUser = (user, container) => { // You can have multiple arguments for a function!
@@ -181,9 +170,6 @@ let renderUser = (user, container) => { // You can have multiple arguments for a
 		`
 	container.insertAdjacentHTML('beforeend', userAddress)
 }
-
-
-
 
 // Now that we have said what we can do, go get the data:
 fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-store' })

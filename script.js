@@ -28,10 +28,19 @@ for (let r = 0; r < rows; r++) {
 		// store that reference to the cell
 		cells[r][c] = cell;
 
+		// desktop
 		cell.addEventListener("mouseover", () => {
 		  toggleCell(r, c);
-		  console.log("togglecell worked")
+		  console.log("mouseover")
 		});
+
+		// mobile
+		cell.addEventListener("dragstart", (event) => {
+		event.preventDefault();
+		  toggleCell(r, c);
+		  console.log("drag")
+		});
+
 
 		// add this to the checkerboard
 		checkerboard.appendChild(cell);
@@ -56,5 +65,5 @@ function toggleCell(row, col) {
 	if (count[row][col] >= threshold) {
 	  cell.style.backgroundColor = "transparent";
 	}
-	console.log("togglecell worked")
+	// console.log("togglecell worked")
   }
