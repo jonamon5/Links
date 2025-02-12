@@ -229,4 +229,4 @@ let swapimags = (block) => {
 
 // [x] home screen title description and buttons hard to read
 
-// [] Remove margins from grid
+// [x] Remove margins from grid
