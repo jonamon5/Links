@@ -126,7 +126,12 @@ let renderBlock = (block) => {
 			let audioItem =
 				`
 				<div class="block">
+					<img src="https://i.etsystatic.com/10919371/r/il/155a7d/1563938723/il_fullxfull.1563938723_1rmr.jpg">
+					
 					<audio controls src="${block.attachment.url}"></audio>
+					<p>${block.title}</p>
+					<p>${block.description}</p>
+					img	
 				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', audioItem)
@@ -210,4 +215,18 @@ let swapimags = (block) => {
 	});
 }
 
-// function for making the cursor move the page
+// TO DO LIST
+// TO DO LIST
+// TO DO LIST
+
+// [] function for making the cursor move the page
+
+// [] function for divs swapping places
+
+// [] Add cover image for audio
+
+// [] Make videos autoplay
+
+// [x] home screen title description and buttons hard to read
+
+// [] Remove margins from grid

@@ -37,6 +37,17 @@ body {
 	}
 }
 
+.landing-content {
+	backdrop-filter: blur(1rem);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: .5rem;
+	padding: 2rem;
+	
+}
+
 .header-title {
 	font-size: 3rem;
 	line-height: 1.2;
@@ -45,7 +56,7 @@ body {
 	cursor: default;
 	transition: 1s ease-in-out;
 	text-shadow: black 0px 0 30px;
-	color: white; /* Ensures visibility */
+	color: white;
 	pointer-events: auto;
 }
 
@@ -113,22 +124,22 @@ body {
 }
 
 .enter-button {
-	border: 2px solid darkgreen;
-	color: darkgreen;
-}
-
-.leave-button {
-	border: 2px solid darkred;
-	color: darkred;
-}
-
-.enter-button:hover {
 	background-color: darkgreen;
 	color: white;
 }
 
-.leave-button:hover {
+.enter-button:hover {
+	background-color: green;
+	color: white;
+}
+
+.leave-button {
 	background-color: darkred;
+	color: white;
+}
+
+.leave-button:hover {
+	background-color: red;
 	color: white;
 }
 
