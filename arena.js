@@ -205,21 +205,16 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		renderUser(data.user, channelUsers)
 
 		// Show modal for each block
-		document.querySelectorAll('.block').forEach( block => {
+		document.querySelectorAll('.block').forEach(block => {
 			block.addEventListener('click', () => {
 
-				// currently only works for images, just for testing purposes
-				let img = block.querySelector('img'); //grab img
-				if (img) { //if img exist
-					let modal = document.getElementById('modal'); // grab dialog modal from html
-					let imageModal = document.getElementById('image-modal') // grab image inside the dialog
-					imageModal.src = img.src; // replace actual img 
-					modal.showModal(); 
+			  const modal = document.getElementById('modal');
+			  const modalContent = document.getElementById('modal-content');
 
-					console.log("image", imageModal);
-				}
+			  modalContent.innerHTML = block.innerHTML;
+			  modal.showModal();
 			});
-		});
+		  });
 	});
 	
 
@@ -233,8 +228,10 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 
 // [] Add cover image for audio
 
-// [] Make videos autoplay
+// [x] Make videos autoplay
 
 // [x] home screen title description and buttons hard to read
 
 // [x] Remove margins from grid
+
+// [] Reverse the hover 
