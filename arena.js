@@ -64,10 +64,21 @@ let renderBlock = (block) => {
 			<p>${block.title}</p>
 			<p>${block.description}</p>
 		</div>
+
+		<dialog id="dialog">
+			<img src="${block.image.original.url}">
+		</dialog>
+
 		</div>
 		`;
 
-		channelBlocks.insertAdjacentHTML('beforeend', imageItem);;
+		channelBlocks.insertAdjacentHTML('beforeend', imageItem);
+
+		// modal.onclick = (event) => { // Listen on our `modal` also…
+		// 	if (event.target == modal) { // Only if clicks are to itself (the background).
+		// 		modal.close() // Close it then too.
+		// 	}
+		// }
 
 	}
 
@@ -189,3 +200,14 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		data.collaborators.forEach((collaborator) => renderUser(collaborator, channelUsers))
 		renderUser(data.user, channelUsers)
 	})
+	
+
+// Function for randomly swapping images
+let swapimags = (block) => {
+	array.forEach(element => {
+		let image = element.original.url;
+		// swap image here with another div
+	});
+}
+
+// function for making the cursor move the page
