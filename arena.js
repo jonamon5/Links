@@ -105,10 +105,10 @@ let renderBlock = (block) => {
 			let videoItem =
 				`
 				<div class="block">
-					<video controls autoplay src="${block.attachment.url}"></video>
+					<video controls autoplay muted src="${block.attachment.url}"></video>
 					<div class="overlay">
 						<p>${block.title}</p>
-						<p>${block.description}</p>
+						<p>${ (block.description === "null") ? block.description : "No Description Provided" }</p> 
 					</div>
 				</div>
 				`
@@ -131,7 +131,6 @@ let renderBlock = (block) => {
 					<audio controls src="${block.attachment.url}"></audio>
 					<p>${block.title}</p>
 					<p>${block.description}</p>
-					img	
 				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', audioItem)
@@ -204,16 +203,25 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		let channelUsers = document.getElementById('channel-users') // Show them together
 		data.collaborators.forEach((collaborator) => renderUser(collaborator, channelUsers))
 		renderUser(data.user, channelUsers)
-	})
-	
 
-// Function for randomly swapping images
-let swapimags = (block) => {
-	array.forEach(element => {
-		let image = element.original.url;
-		// swap image here with another div
+		// Show modal for each block
+		document.querySelectorAll('.block').forEach( block => {
+			block.addEventListener('click', () => {
+
+				// currently only works for images, just for testing purposes
+				let img = block.querySelector('img'); //grab img
+				if (img) { //if img exist
+					let modal = document.getElementById('modal'); // grab dialog modal from html
+					let imageModal = document.getElementById('image-modal') // grab image inside the dialog
+					imageModal.src = img.src; // replace actual img 
+					modal.showModal(); 
+
+					console.log("image", imageModal);
+				}
+			});
+		});
 	});
-}
+	
 
 // TO DO LIST
 // TO DO LIST
