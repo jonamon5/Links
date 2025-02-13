@@ -278,7 +278,11 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 
 // [] function for divs swapping places
 
-// [] Add cover image for audio
+// [] add a close modal button
+
+// [] stop video playing when leaving the modal
+
+// [x] Add cover image for audio
 
 // [x] Make videos autoplay
 
@@ -286,4 +290,4 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 
 // [x] Remove margins from grid
 
-// [] Reverse the hover 
+// [x] Reverse the hover 
