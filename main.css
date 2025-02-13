@@ -27,6 +27,8 @@ Header {
 	align-content: center;
 	filter: blur(1rem);
 	transition: .8s ease;
+	background-color: white;
+	cursor: pointer;
 }
 
 /* fit parent container */
@@ -39,18 +41,12 @@ Header {
 	display: flex;
 	align-items: center;
 	overflow: hidden;
+	color: black;
 }
 
 .block p:first-of-type{
 	margin-bottom: 1rem;
 	font-weight: bold;
-}
-
-.block audio {
-	width: -webkit-fill-available;
-	height: -webkit-fill-available;
-	border: 1px solid white;
-	border-radius: 10px;
 }
 
 .block iframe {
@@ -123,26 +119,46 @@ footer {
 	align-items: center;
 }
 
+dialog#modal[open] #modal-content {
+	transform: scale(1);
+	opacity: 1;
+}
+
 dialog#modal::backdrop {
 	backdrop-filter: blur(1rem);
+	filter: brightness(50%);
 }
 
 #modal-content {
 	width: 100%;
 	height: 100%;
+	object-fit: contain;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transform: scale(0.8);
+	transition: .8s ease;
 }
 
-#model-cotent img,
-#model-cotent video,
-#model-cotent audio,
-#model-cotent iframe
-{
+.modal-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	transition: .8s ease;
+	width: 50vw;
+	height: 50vh;
+}
+
+.modal-container audio {
 	width: 100%;
 	height: 100%;
-	object-fit: contain;
+	background-image: url("https://cdn.pixabay.com/animation/2023/10/24/13/50/13-50-26-112_512.gif");
+	background-color: white;
+}
+
+.modal-title {
+	font-weight: bold;
+	font-size: 2rem;
 }
 
 /* MEDIA QUERY */

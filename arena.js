@@ -38,32 +38,57 @@ let renderBlock = (block) => {
 	// Links!
 	if (block.class == 'Link') {
 		let linkItem =
-			`
-		<div class="block">
-		  <img src="${block.image.original.url}">
-
-		  <div class="overlay">
-			<p>${block.title}</p>
-			<p>${block.description}</p>
-		</div>
-		</div>
-			`
+		`
+			<div class="block" id="block-${block.id}">
+		  	<img src="${block.image.original.url}">
+			</div>
+		`
 		channelBlocks.insertAdjacentHTML('beforeend', linkItem)
 
-		console.log('link')
+		document.getElementById(`block-${block.id}`).addEventListener('click', () => {
+			let modalContent = document.getElementById('modal-content');
+			modalContent.innerHTML = ''; //empty this before next content is inserted; prevent potential errors
+			modalContent.innerHTML = `
+			<div class = "modal-container" > 
+				<img src="${block.image.original.url}" alt="${block.title}">
+				<h2 class="modal-title">${block.title}</h2>
+				<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
+			</div>
+			`;
+			document.getElementById('modal').showModal(); //showModal is built in dialog element
+			
+		});
+
+		// console.log("link", block)
 	}
 
 	// Images!
 
 	else if (block.class == 'Image') {
+
+		// this shows on main page
 		let imageItem = `
-		<div class="block">
+		<div class="block" id="block-${block.id}">
 		  <img src="${block.image.original.url}">
 		</div>
 		`;
-
 		channelBlocks.insertAdjacentHTML('beforeend', imageItem);
 
+		// modal for images - attaching block.id to each block because I plan to swap the divs with one another in the future, so I will need a unique ID to retrieve that info later. Using something like last-element-child will mostly not worth with my future plans. More work here tho...
+
+		document.getElementById(`block-${block.id}`).addEventListener('click', () => {
+			let modalContent = document.getElementById('modal-content');
+			modalContent.innerHTML = ''; //empty this before next content is inserted; prevent potential errors
+			modalContent.innerHTML = `
+			<div class = "modal-container" > 
+				<img src="${block.image.original.url}" alt="${block.title}">
+				<h2 class="modal-title">${block.title}</h2>
+				<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
+			</div>
+			`;
+			document.getElementById('modal').showModal(); //showModal is built in dialog element
+			
+		  });
 	}
 
 
@@ -85,40 +110,58 @@ let renderBlock = (block) => {
 
 		// Uploaded videos!
 		if (attachment.includes('video')) {
-			// …still up to you, but we’ll give you the `video` element:
+
 			let videoItem =
 				`
-				<div class="block">
-					<video controls autoplay muted src="${block.attachment.url}"></video>
-					<div class="overlay">
-						<p>${block.title}</p>
-						<p>${ (block.description === "null") ? block.description : "No Description Provided" }</p> 
-					</div>
+				<div class="block" id="block-${block.id}">
+		  			<video controls autoplay muted src="${block.attachment.url}"></video>
 				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', videoItem)
+
+			document.getElementById(`block-${block.id}`).addEventListener('click', () => {
+				let modalContent = document.getElementById('modal-content');
+				modalContent.innerHTML = ''; //empty this before next content is inserted; prevent potential errors
+				modalContent.innerHTML = `
+				<div class = "modal-container" > 
+					<video controls autoplay muted src="${block.attachment.url}"></video>
+					<h2 class="modal-title">${block.title}</h2>
+					<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
+				</div>
+				`;
+				document.getElementById('modal').showModal(); //showModal is built in dialog element
+				
+			});
 		}
 
 		// Uploaded PDFs!
 		else if (attachment.includes('pdf')) {
-			// …up to you!
+			console.log("pdf", block)
 		}
 
 		// Uploaded audio!
 		else if (attachment.includes('audio')) {
-			// …still up to you, but here’s an `audio` element:
 			let audioItem =
 				`
-				<div class="block">
-					<img src="https://i.etsystatic.com/10919371/r/il/155a7d/1563938723/il_fullxfull.1563938723_1rmr.jpg">
-					
-					<audio controls src="${block.attachment.url}"></audio>
-					<p>${block.title}</p>
-					<p>${block.description}</p>
+				<div class="block" id="block-${block.id}">
+		  			<img src="https://cdn.pixabay.com/animation/2023/10/24/13/50/13-50-26-112_512.gif"></img>
 				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', audioItem)
-			// More on audio: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio
+
+			document.getElementById(`block-${block.id}`).addEventListener('click', () => {
+				let modalContent = document.getElementById('modal-content');
+				modalContent.innerHTML = ''; 
+				modalContent.innerHTML = `
+				<div class = "modal-container" > 
+					<audio controls autoplay muted src="${block.attachment.url}"></audio>
+					<h2 class="modal-title">${block.title}</h2>
+					<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
+				</div>
+				`;
+				document.getElementById('modal').showModal(); 
+				
+			});
 
 		}
 
