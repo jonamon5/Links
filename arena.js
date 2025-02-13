@@ -114,23 +114,24 @@ let renderBlock = (block) => {
 			let videoItem =
 				`
 				<div class="block" id="block-${block.id}">
-		  			<video controls autoplay muted src="${block.attachment.url}"></video>
+					<video autoplay muted src="${block.attachment.url}"></video>
 				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', videoItem)
 
 			document.getElementById(`block-${block.id}`).addEventListener('click', () => {
 				let modalContent = document.getElementById('modal-content');
-				modalContent.innerHTML = ''; //empty this before next content is inserted; prevent potential errors
+				modalContent.innerHTML = ''; 
+
 				modalContent.innerHTML = `
 				<div class = "modal-container" > 
-					<video controls autoplay muted src="${block.attachment.url}"></video>
+					<video autoplay muted src="${block.attachment.url}"></video>
 					<h2 class="modal-title">${block.title}</h2>
 					<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
 				</div>
 				`;
-				document.getElementById('modal').showModal(); //showModal is built in dialog element
-				
+				console.log("video", block)
+				document.getElementById('modal').showModal(); 
 			});
 		}
 
@@ -154,17 +155,23 @@ let renderBlock = (block) => {
 				modalContent.innerHTML = ''; 
 				modalContent.innerHTML = `
 				<div class = "modal-container" > 
-					<audio controls autoplay muted src="${block.attachment.url}"></audio>
+					<audio controls autoplay src="${block.attachment.url}"></audio>
 					<h2 class="modal-title">${block.title}</h2>
 					<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
 				</div>
 				`;
 				document.getElementById('modal').showModal(); 
-				
+
+				// closing the modal with pause the music - don't want sound continuing playing after close 
+				document.getElementById('modal').addEventListener('cancel', function() {
+					let sound = this.querySelectorAll('audio');
+					sound.forEach(audio => {
+					  audio.pause();
+					  audio.currentTime = 0; // reset audio to beginning
+					});
+				  });
 			});
-
 		}
-
 	}
 
 	// Linked media…
@@ -173,15 +180,29 @@ let renderBlock = (block) => {
 
 		// Linked video!
 		if (embed.includes('video')) {
-			// …still up to you, but here’s an example `iframe` element:
 			let linkedVideoItem =
 				`
-				<div class="block">
-					${block.embed.html}
+				<div class="block" id="block-${block.id}">
+					<img src="${block.image.display.url}">
 				</div>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', linkedVideoItem)
-			// More on iframe: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe
+
+			// video modal 
+			document.getElementById(`block-${block.id}`).addEventListener('click', () => {
+				let modalContent = document.getElementById('modal-content');
+				modalContent.innerHTML = ''; 
+
+				modalContent.innerHTML = `
+				<div class = "modal-container" > 
+					${block.embed.html}
+					<h2 class="modal-title">${block.title}</h2>
+					<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
+				</div>
+				`;
+				console.log("video", block)
+				document.getElementById('modal').showModal(); 
+			});
 		}
 
 		// Linked audio!
@@ -189,7 +210,7 @@ let renderBlock = (block) => {
 			let richItem =
 				`
 			<div class="block">
-				<audio controls src="${block.rich.url}"></video>
+				<audio controls src="${block.rich.url}"></audio>
 			</div>
 			`
 			channelBlocks.insertAdjacentHTML('beforeend', richItem)

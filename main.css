@@ -35,6 +35,7 @@ Header {
 .block img {
 	height: 100%;
 	width: 100%;
+	object-fit: cover;
 }
 
 .block p {
@@ -130,8 +131,8 @@ dialog#modal::backdrop {
 }
 
 #modal-content {
-	width: 100%;
-	height: 100%;
+	width: 80vw;
+	height: 80vh;
 	object-fit: contain;
 	display: flex;
 	justify-content: center;
@@ -143,10 +144,12 @@ dialog#modal::backdrop {
 .modal-container {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	gap: 1rem;
 	transition: .8s ease;
-	width: 50vw;
-	height: 50vh;
+	width: 100%;
+	height: 100%;
 }
 
 .modal-container audio {
@@ -154,6 +157,12 @@ dialog#modal::backdrop {
 	height: 100%;
 	background-image: url("https://cdn.pixabay.com/animation/2023/10/24/13/50/13-50-26-112_512.gif");
 	background-color: white;
+}
+
+.modal-container iframe {
+	width: -webkit-fill-available;
+	height: 100%;
+	
 }
 
 .modal-title {
