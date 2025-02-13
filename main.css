@@ -21,13 +21,12 @@ Header {
 
 .block {
 	position: relative;
-	/* width: 20rem;
-	height: 20rem; */
 	aspect-ratio: 1/1;
 	overflow: hidden;
 	justify-content: center;
 	align-content: center;
-	/* border-radius: 10px; */
+	filter: blur(1rem);
+	transition: .8s ease;
 }
 
 /* fit parent container */
@@ -81,15 +80,16 @@ Header {
 	text-align: center;
 	opacity: 0;
 	transition: .8s ease;
-
-	/* very cool, just learned about this property */
-	backdrop-filter: blur(0px);
 }
 
+.block:hover {
+	opacity: 1;
+	filter: blur(0);
+}
 
 .block:hover .overlay {
 	opacity: 1;
-	backdrop-filter: blur(.5rem);
+	filter: blur(0);
 }
 
 .overlay-title {

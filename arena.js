@@ -59,26 +59,10 @@ let renderBlock = (block) => {
 		let imageItem = `
 		<div class="block">
 		  <img src="${block.image.original.url}">
-
-		  <div class="overlay">
-			<p>${block.title}</p>
-			<p>${block.description}</p>
-		</div>
-
-		<dialog id="dialog">
-			<img src="${block.image.original.url}">
-		</dialog>
-
 		</div>
 		`;
 
 		channelBlocks.insertAdjacentHTML('beforeend', imageItem);
-
-		// modal.onclick = (event) => { // Listen on our `modal` also…
-		// 	if (event.target == modal) { // Only if clicks are to itself (the background).
-		// 		modal.close() // Close it then too.
-		// 	}
-		// }
 
 	}
 
@@ -204,17 +188,21 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		data.collaborators.forEach((collaborator) => renderUser(collaborator, channelUsers))
 		renderUser(data.user, channelUsers)
 
-		// Show modal for each block
-		document.querySelectorAll('.block').forEach(block => {
-			block.addEventListener('click', () => {
+		// Show modal for each block - might move this logic to the if else statements because its getting too complicated with all the different class types 
+		// document.querySelectorAll('.block').forEach(block => {
+		// 	block.addEventListener('click', () => {
 
-			  const modal = document.getElementById('modal');
-			  const modalContent = document.getElementById('modal-content');
+		// 	  const modal = document.getElementById('modal');
+		// 	  const modalContent = document.getElementById('modal-content');
 
-			  modalContent.innerHTML = block.innerHTML;
-			  modal.showModal();
-			});
-		  });
+		// 	  modalContent.innerHTML = block.innerHTML;
+		// 	  modal.showModal();
+
+		// 	  console.log("modal", modal)
+		// 	  console.log("modalContent", modalContent)
+		// 	});
+		//   });
+
 	});
 	
 
