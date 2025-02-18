@@ -22,7 +22,7 @@ for (let r = 0; r < rows; r++) {
 
 		// add in black or white coloring to cells
 		let isBlack = (r + c) % 2 === 0; //if row and column are even...
-		cell.style.backgroundColor = isBlack ? "black" : "white"; 
+		cell.style.backgroundColor = isBlack ? "black" : "darkgrey"; 
 		// then background color is black, if not then white - love ternary statements 
 
 		// store that reference to the cell
@@ -35,7 +35,7 @@ for (let r = 0; r < rows; r++) {
 		});
 
 		// mobile
-		cell.addEventListener("dragstart", (event) => {
+		cell.addEventListener("touchstart", (event) => {
 		event.preventDefault();
 		  toggleCell(r, c);
 		  console.log("drag")
@@ -65,5 +65,4 @@ function toggleCell(row, col) {
 	if (count[row][col] >= threshold) {
 	  cell.style.backgroundColor = "transparent";
 	}
-	// console.log("togglecell worked")
   }
