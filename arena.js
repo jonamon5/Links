@@ -155,8 +155,7 @@ let renderBlock = (block) => {
 			let pdfItem =
 			`
 			<div class="block" id="block-${block.id}">
-				<p>${block.content}</p>
-				<p>${block.description_html}</p>
+				<img src="${block.image.original.url}">
 			</div>
 			`
 		channelBlocks.insertAdjacentHTML('beforeend', pdfItem)
@@ -167,8 +166,11 @@ let renderBlock = (block) => {
 
 			modalContent.innerHTML = `
 			<div class = "modal-container" > 
-				<p>${block.content}</p>
-				<p>${block.description_html}</p>
+				<img src="${block.image.original.url}">
+				<p><a href="${block.attachment.url}"> ${block.title} ↗</a></p>
+				<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
+
+
 			</div>
 			`;
 			console.log("pdf", block)
@@ -273,6 +275,23 @@ let renderUser = (user) => { // You can have multiple arguments for a function!
 		footer.insertAdjacentHTML('beforeend', userAddress)
 }
 
+// function for shuffle blocks randomly
+let shuffleBlocks = () => {
+	let container = document.getElementById('channel-blocks');
+
+	// grab all blocks inside the channel-blocks container - https://developer.mozilla.org/en-US/docs/Web/API/Element/children
+	let children = container.children
+
+	// turn blocks into array to shuffe - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+	let blocks = Array.from(children);
+
+	// sort blocks randomly - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+	blocks.sort(() => Math.random() - 0.5);
+
+	// for each block in the array, move block to the end of the array - sorting will ensure all blocks move around
+	blocks.forEach(block => container.appendChild(block));
+  }
+
 // Now that we have said what we can do, go get the data:
 fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-store' })
 	.then((response) => response.json()) // Return it as JSON data
@@ -280,44 +299,54 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		console.log("Data", data) // Always good to check your response!
 		placeChannelInfo(data) // Pass the data to the first function
 
-		// Loop through the `contents` array (list), backwards. Are.na returns them in reverse!
 		data.contents.reverse().forEach((block) => {
-			// console.log(block) // The data for a single block
-			renderBlock(block) // Pass the single block data to the render function
-		})
+			renderBlock(block); // Render each block
+		  });
 
 		// Also display the owner and collaborators:
 		let channelUsers = document.getElementById('channel-users') // Show them together
 		data.collaborators.forEach((collaborator) => renderUser(collaborator, channelUsers))
 		renderUser(data.user, channelUsers)
 
-		// Show modal for each block - might move this logic to the if else statements because its getting too complicated with all the different class types 
-		// document.querySelectorAll('.block').forEach(block => {
-		// 	block.addEventListener('click', () => {
+		// shuffle the blocks every X seconds
+		let shuffleInterval = setInterval(shuffleBlocks, 3000);
 
-		// 	  const modal = document.getElementById('modal');
-		// 	  const modalContent = document.getElementById('modal-content');
+		let shuffleButton = document.getElementById('toggle-shuffle');
 
-		// 	  modalContent.innerHTML = block.innerHTML;
-		// 	  modal.showModal();
+		shuffleButton.addEventListener('click', () => {
+			if (shuffleInterval) { // if shuffleInterval is active...
+			  // Stop shuffling
+			  clearInterval(shuffleInterval); // https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval
+			  shuffleInterval = null;
+			  shuffleButton.textContent = "Start Shuffling"; // change text
+			} else {
+			  // Start shuffling
+			  shuffleInterval = setInterval(shuffleBlocks, 3000);
+			  shuffleButton.textContent = "Stop Shuffling";
+			}
+		  });
 
-		// 	  console.log("modal", modal)
-		// 	  console.log("modalContent", modalContent)
-		// 	});
-		//   });
-
+		// close modal 
+		document.getElementById('close-modal').addEventListener('click', () => {
+			document.getElementById('modal').close();
+		});
 	});
+
 	
 
 // TO DO LIST
 // TO DO LIST
 // TO DO LIST
 
-// [] function for making the cursor move the page
+// [] function for making the cursor move the page - idk about this one
 
-// [] function for divs swapping places
+// [] button to start and stop shuffling
 
-// [] add a close modal button
+// [] reset button for the checkerboard home page
+
+// [x] function for divs swapping places
+
+// [x] add a close modal button
 
 // [] stop video playing when leaving the modal
 

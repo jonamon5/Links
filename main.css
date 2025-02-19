@@ -9,11 +9,35 @@ body {
 }
 
 Header {
-	display: flex;
-	justify-content: space-evenly;
 	margin: 1rem;
 	margin-top: 2rem;
 	margin-bottom: 3rem;
+	
+	position: sticky;
+	z-index: 1;
+	top: 1rem;
+}
+
+Header section {
+	display: flex;
+	justify-content: space-between;
+}
+
+.nav {
+	border: 2px solid white;
+	border-radius: 1rem;
+	padding: 1rem;
+	cursor: pointer;
+}
+
+button {
+	cursor: pointer;
+}
+
+.nav:hover {
+	background-color: white;
+	color: black;
+	transition: 0.8s ease;
 }
 
 img {
@@ -43,7 +67,6 @@ video {
 	cursor: pointer;
 }
 
-/* fit parent container */
 .block img {
 	height: 100%;
 	width: 100%;
@@ -67,13 +90,11 @@ video {
 	height: 100%;
 }
 
-/* CSS only applies to paragraph with immmediate parent as .block */
 .block > p {
 	height: -webkit-fill-available;
 	padding: 1rem;
 	border: 1px solid white;
 }
-
 
 .overlay {
 	position: absolute;
@@ -130,6 +151,10 @@ footer {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	/* border: 0.5rem solid white;
+	background-color: white;
+	color: black; */
 }
 
 dialog#modal[open] #modal-content {
@@ -181,6 +206,15 @@ dialog#modal::backdrop {
 	font-weight: bold;
 	font-size: 2rem;
 }
+
+#close-modal {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	font-size: 2rem;
+	cursor: pointer;
+	z-index: 1;
+  }
 
 /* MEDIA QUERY */
 /* MEDIA QUERY */
