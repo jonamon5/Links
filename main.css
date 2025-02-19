@@ -12,7 +12,7 @@ Header {
 	margin: 1rem;
 	margin-top: 2rem;
 	margin-bottom: 3rem;
-	
+
 	position: sticky;
 	z-index: 1;
 	top: 1rem;
@@ -121,6 +121,33 @@ video {
 	opacity: 1;
 	filter: blur(0);
 }
+  
+/* moire animation */
+.image-block::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 150%;
+	height: 100%;
+	pointer-events: none;
+	background: repeating-linear-gradient( 90deg,transparent, transparent 10px,
+		rgba(255, 255, 255, 0.3) 10px,
+		rgba(255, 255, 255, 0.3) 20px
+	);
+	transform: translateX(0);
+	animation: moire-animation 3s infinite alternate ease-in-out;
+  }
+  
+  @keyframes moire-animation {
+	from {
+	  transform: translateX(0);
+	}
+	to {
+	  transform: translateX(-20%);
+	}
+  }
+  
 
 .overlay-title {
 	margin-bottom: 1rem;
@@ -136,6 +163,7 @@ footer {
 	margin-top: 2rem;
 	text-align: center;
 }
+
 
 /* MODAL */
 /* MODAL */
@@ -232,4 +260,18 @@ dialog#modal::backdrop {
 		width: 12rem;
 		height: 12rem;
 	}
+}
+
+@media (max-width: 430px) {
+	.block-container {
+		grid-template-columns: 1fr;
+	}
+	.block {
+		width: 100vw;
+		height: 100vh;
+	}
+	.block.unblur {
+		filter: none;
+		transition: 1.5s ease-in-out;
+	  }
 }

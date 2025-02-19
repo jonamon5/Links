@@ -68,7 +68,7 @@ let renderBlock = (block) => {
 
 		// this shows on main page
 		let imageItem = `
-		<div class="block" id="block-${block.id}">
+		<div class="block image-block" id="block-${block.id}">
 		  <img src="${block.image.original.url}">
 		</div>
 		`;
@@ -167,7 +167,7 @@ let renderBlock = (block) => {
 			modalContent.innerHTML = `
 			<div class = "modal-container" > 
 				<img src="${block.image.original.url}">
-				<p><a href="${block.attachment.url}"> ${block.title} ↗</a></p>
+				<h2><a href="${block.attachment.url}"> ${block.title} ↗</a></h2>
 				<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
 
 
@@ -310,7 +310,6 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 
 		// shuffle the blocks every X seconds
 		let shuffleInterval = setInterval(shuffleBlocks, 3000);
-
 		let shuffleButton = document.getElementById('toggle-shuffle');
 
 		shuffleButton.addEventListener('click', () => {
@@ -326,36 +325,25 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 			}
 		  });
 
-		// close modal 
+		// close modal function
 		document.getElementById('close-modal').addEventListener('click', () => {
 			document.getElementById('modal').close();
 		});
+		
+		// Unblur on mobile visible function
+		// https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver
+		// https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/isIntersecting
+		let observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+			entry.target.classList.add('unblur');
+			} else {
+			entry.target.classList.remove('unblur');
+			}
+		});
+		}, { threshold: 0.5 }); // unblurs at 50%
+
+		document.querySelectorAll('.block').forEach(block => {
+		observer.observe(block);
+		});
 	});
-
-	
-
-// TO DO LIST
-// TO DO LIST
-// TO DO LIST
-
-// [] function for making the cursor move the page - idk about this one
-
-// [] button to start and stop shuffling
-
-// [] reset button for the checkerboard home page
-
-// [x] function for divs swapping places
-
-// [x] add a close modal button
-
-// [] stop video playing when leaving the modal
-
-// [x] Add cover image for audio
-
-// [x] Make videos autoplay
-
-// [x] home screen title description and buttons hard to read
-
-// [x] Remove margins from grid
-
-// [x] Reverse the hover 
