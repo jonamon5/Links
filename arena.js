@@ -14,10 +14,10 @@ let channelSlug = 'illusion-v0vgfx61y_e'
 // First, let’s lay out some *functions*, starting with our basic metadata:
 let placeChannelInfo = (data) => {
 	// Target some elements in your HTML:
-	let channelTitle = document.getElementById('channel-title')
-	let channelDescription = document.getElementById('channel-description')
-	let channelCount = document.getElementById('channel-count')
-	let channelLink = document.getElementById('channel-link')
+	let channelTitle = document.createElement("channel-title")
+	let channelDescription = document.createElement("channel-description")
+	let channelCount = document.createElement("channel-count")
+	let channelLink = document.createElement("channel-link")
 
 	// Then set their content/attributes to our data:
 	channelTitle.innerHTML = data.title
@@ -95,13 +95,28 @@ let renderBlock = (block) => {
 	// Text!
 	else if (block.class == 'Text') {
 		let textItem = `
-		<div class="block">
+		<div class="block" id="block-${block.id}">
 			<p>${block.content}</p>
 			<p>${block.description_html}</p>
 		</div>
 		`;
 		channelBlocks.insertAdjacentHTML('beforeend', textItem);
-		console.log('text')
+
+		document.getElementById(`block-${block.id}`).addEventListener('click', () => {
+			let modalContent = document.getElementById('modal-content');
+			modalContent.innerHTML = ''; 
+
+			modalContent.innerHTML = `
+			<div class = "modal-container" >
+				<img src="https://www.shareicon.net/download/2015/10/02/649720_write_512x512.png" > 
+				<p>${block.content}</p>
+				<p>${block.description_html}</p>
+			</div>
+			`;
+			console.log("video", block)
+			document.getElementById('modal').showModal(); 
+		});
+
 	}
 
 	// Uploaded (not linked) media…
@@ -137,7 +152,29 @@ let renderBlock = (block) => {
 
 		// Uploaded PDFs!
 		else if (attachment.includes('pdf')) {
+			let pdfItem =
+			`
+			<div class="block" id="block-${block.id}">
+				<p>${block.content}</p>
+				<p>${block.description_html}</p>
+			</div>
+			`
+		channelBlocks.insertAdjacentHTML('beforeend', pdfItem)
+
+		document.getElementById(`block-${block.id}`).addEventListener('click', () => {
+			let modalContent = document.getElementById('modal-content');
+			modalContent.innerHTML = ''; 
+
+			modalContent.innerHTML = `
+			<div class = "modal-container" > 
+				<p>${block.content}</p>
+				<p>${block.description_html}</p>
+			</div>
+			`;
 			console.log("pdf", block)
+			document.getElementById('modal').showModal(); 
+		});
+
 		}
 
 		// Uploaded audio!
@@ -222,16 +259,18 @@ let renderBlock = (block) => {
 }
 
 // It‘s always good to credit your work:
-let renderUser = (user, container) => { // You can have multiple arguments for a function!
+
+let renderUser = (user) => { // You can have multiple arguments for a function!
+
+	let footer = document.getElementById('footer')
+
 	let userAddress =
 		`
 		<address>
-			<img src="${user.avatar_image.display}">
-			<h3>${user.first_name}</h3>
-			<p><a href="https://are.na/${user.slug}">Are.na profile ↗</a></p>
+			<p><a href="https://are.na/${user.slug}"> ${user.first_name} Arena Profile ↗</a></p>
 		</address>
 		`
-	container.insertAdjacentHTML('beforeend', userAddress)
+		footer.insertAdjacentHTML('beforeend', userAddress)
 }
 
 // Now that we have said what we can do, go get the data:
