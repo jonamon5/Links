@@ -310,11 +310,13 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 			  // Stop shuffling
 			  clearInterval(blockInterval); // https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval
 			  blockInterval = null;
-			  shuffleButton.textContent = "Start Shuffling Blocks"; // change text
+			  shuffleButton.textContent = "⬛ Start Shuffling Blocks"; // change text
+			  shuffleButton.style.color = "darkgreen";
 			} else {
 			  // Start shuffling
 			  blockInterval = setInterval(shuffleBlocks, 1500);
-			  shuffleButton.textContent = "Stop Shuffling Blocks";
+			  shuffleButton.textContent = "⬛ Stop Shuffling Blocks";
+			  shuffleButton.style.color = "darkred";
 			}
 		  });
 
@@ -342,7 +344,7 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 
 		// change block container to have different grid class so we can change grid layout - mobile and desktop
 		let gridLayouts = []; //gridLayout empty array at first - populate later 
-		
+
 		if (window.innerWidth <= 700 ){
 			gridLayouts = ['mobile-grid', 'mobile-grid-two']  
 		} else {
@@ -357,6 +359,8 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 
 			let randomLayout = gridLayouts[Math.floor(Math.random() * gridLayouts.length)]; //pick a random layout of the 3...can be more but have to add more grid classes to css
 
+			// letMobilerandom = randomLayout.toggle();
+
 			container.classList.add(randomLayout); //add that class back in
 		}
 
@@ -366,20 +370,34 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		// change grid layout button - same as shuffleButton function
 		layoutButton.addEventListener('click', () => {
 			if (layoutInterval) {
-			  clearInterval(layoutInterval);1
+			  clearInterval(layoutInterval);
 			  layoutInterval = null;
-			  layoutButton.textContent = "Start Shuffling Layouts";
+			  layoutButton.textContent = "🔲 Start Shuffling Layouts";
+			  layoutButton.style.color = "darkgreen"
 			} else {
 			  layoutInterval = setInterval(changeGridlayout, 1500);
-			  layoutButton.textContent = "Stop Shuffling Layouts";
+			  layoutButton.textContent = "🔲 Stop Shuffling Layouts";
+			  layoutButton.style.color = "darkred"
 			}
 		  });
 
 		// Toggle Blur button
-		  document.getElementById('toggle-blur').addEventListener('click', () => {
-			const blocks = document.querySelectorAll('.block');
-			blocks.forEach(block => {
-			  block.classList.toggle('blur');
+		let blurButton = document.getElementById('toggle-blur');
+		let blurActive = false;
+
+		blurButton.addEventListener('click', () => {
+			if (blurActive) {				
+				document.querySelectorAll('.block').forEach(block => {
+					block.classList.remove('blur');
 			});
-		  });
+			blurActive = false;
+			blurButton.textContent = "👓 Remove Blur";
+			} else {
+				document.querySelectorAll('.block').forEach(block => {
+					block.classList.add('blur');
+			});
+			blurActive = true;
+			blurButton.textContent = "🕶️ Add Blur";
+		  };
+		})
 	});
