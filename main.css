@@ -188,8 +188,8 @@ video {
 	gap: 1rem;
 }
 
-.block .blur {
-	filter: blur(0);
+.block.blur {
+	filter: none;
 }
 
 footer {
