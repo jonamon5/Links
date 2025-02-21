@@ -32,9 +32,6 @@ let renderBlock = (block) => {
 	// To start, a shared `ul` where we’ll insert all our blocks
 	let channelBlocks = document.getElementById('channel-blocks')
 
-	// console.log("BLOCK", block)
-	// block = 1 piece of content
-
 	// Links!
 	if (block.class == 'Link') {
 		let linkItem =
@@ -58,8 +55,6 @@ let renderBlock = (block) => {
 			document.getElementById('modal').showModal(); //showModal is built in dialog element
 			
 		});
-
-		// console.log("link", block)
 	}
 
 	// Images!
@@ -263,9 +258,7 @@ let renderBlock = (block) => {
 // It‘s always good to credit your work:
 
 let renderUser = (user) => { // You can have multiple arguments for a function!
-
 	let footer = document.getElementById('footer')
-
 	let userAddress =
 		`
 		<address>
@@ -347,24 +340,33 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		observer.observe(block);
 		});
 
-		// change block container to have different grid class so we can change grid layout
-		let gridLayouts = ['original-grid', 'grid-two', 'grid-three']
-
-		let changeGridlayout = () => {
-			let container = document.getElementById('channel-blocks');
-			gridLayouts.forEach(layout => container.classList.remove(layout));
-
-			let randomLayout = gridLayouts[Math.floor(Math.random() * gridLayouts.length)];
-
-			container.classList.add(randomLayout);
+		// change block container to have different grid class so we can change grid layout - mobile and desktop
+		let gridLayouts = []; //gridLayout empty array at first - populate later 
+		
+		if (window.innerWidth <= 700 ){
+			gridLayouts = ['mobile-grid', 'mobile-grid-two']  
+		} else {
+			gridLayouts = ['original-grid', 'grid-two', 'grid-three']
 		}
 
-		let layoutInterval = setInterval(changeGridlayout, 1500);
+		// change grid layout function
+		let changeGridlayout = () => {
+			let container = document.getElementById('channel-blocks'); //grab block container
+
+			gridLayouts.forEach(layout => container.classList.remove(layout)); //remove class for each block 
+
+			let randomLayout = gridLayouts[Math.floor(Math.random() * gridLayouts.length)]; //pick a random layout of the 3...can be more but have to add more grid classes to css
+
+			container.classList.add(randomLayout); //add that class back in
+		}
+
+		let layoutInterval = setInterval(changeGridlayout, 1500); //change layout every 1.5s
 		let layoutButton = document.getElementById('layout-shuffle');
 
+		// change grid layout button - same as shuffleButton function
 		layoutButton.addEventListener('click', () => {
 			if (layoutInterval) {
-			  clearInterval(layoutInterval);
+			  clearInterval(layoutInterval);1
 			  layoutInterval = null;
 			  layoutButton.textContent = "Start Shuffling Layouts";
 			} else {
@@ -373,7 +375,7 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 			}
 		  });
 
-		// Toggle Blur 
+		// Toggle Blur button
 		  document.getElementById('toggle-blur').addEventListener('click', () => {
 			const blocks = document.querySelectorAll('.block');
 			blocks.forEach(block => {

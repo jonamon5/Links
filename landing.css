@@ -63,7 +63,7 @@ body {
 .header-title span {
 	display: inline-block;
 	transition: transform, opacity, filter;
-	transition-duration: 0.9s;
+	transition-duration: 1s;
 	transition-timing-function: ease-in-out
 }
 
