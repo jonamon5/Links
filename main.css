@@ -24,21 +24,27 @@ Header section {
 }
 
 .nav {
-	border: 2px solid white;
-	border-radius: 1rem;
+	border-radius: .5rem;
+	border: 2px solid transparent;
 	padding: 1rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
 	cursor: pointer;
+	background-color: white;
+	color: black;
+}
+
+.nav:hover {
+	background-color: transparent;
+	color: white;
+	transition: 0.8s ease;
+	border: 2px solid white;
 }
 
 button {
 	cursor: pointer;
 }
 
-.nav:hover {
-	background-color: white;
-	color: black;
-	transition: 0.8s ease;
-}
 
 img {
 	width: auto;
@@ -49,6 +55,10 @@ video {
 	width: -webkit-fill-available;
 	height: -webkit-fill-available;	
 }
+
+/* BLOCKS */
+/* BLOCKS */
+/* BLOCKS */
 
 .block-container {
 	display: grid;
@@ -153,6 +163,33 @@ video {
 	margin-bottom: 1rem;
 	font-weight: bold;
 	font-size: 1.25rem;
+}
+
+/* MULTIPLE GRID LAYOUT */
+.original-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-two {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr)
+
+}
+
+.grid-two .block:first-of-type {
+	grid-column: span 2;
+	grid-row: span 2;
+}
+
+.grid-three {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: 1rem;
+}
+
+.block .blur {
+	filter: blur(0);
 }
 
 footer {

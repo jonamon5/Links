@@ -117,30 +117,39 @@ body {
 .buttons a {
 	/* margin-top: 5rem; */
 	padding: 1rem;
-	padding-left: 3rem;
-	padding-right: 3rem;
-	border-radius: 1rem;
+	padding-left: 4rem;
+	padding-right: 4rem;
+	border-radius: .5rem;
 	transition: .5s ease;
+	/* border: 2px solid black; */
+}
+
+.enter-button, .leave-button {
+	border: 3px solid white;
+	background-color: white;
+	color: black;
 }
 
 .enter-button {
-	background-color: darkgreen;
-	color: white;
-}
-
-.enter-button:hover {
-	background-color: green;
-	color: white;
+	color: darkgreen;
 }
 
 .leave-button {
-	background-color: darkred;
-	color: white;
+	color: darkred;
+}
+
+.enter-button:hover, .leave-button:hover {
+	border: 3px solid lightgray;
+	background-color: transparent;
+	color: black;
 }
 
 .leave-button:hover {
-	background-color: red;
-	color: white;
+	color: darkred;
+}
+
+.enter-button:hover {
+	color: darkgreen;
 }
 
 /* CHECKERBOARD */

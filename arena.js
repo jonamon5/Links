@@ -309,19 +309,19 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		renderUser(data.user, channelUsers)
 
 		// shuffle the blocks every X seconds
-		let shuffleInterval = setInterval(shuffleBlocks, 3000);
-		let shuffleButton = document.getElementById('toggle-shuffle');
+		let blockInterval = setInterval(shuffleBlocks, 1500);
+		let shuffleButton = document.getElementById('block-shuffle');
 
 		shuffleButton.addEventListener('click', () => {
-			if (shuffleInterval) { // if shuffleInterval is active...
+			if (blockInterval) { // if shuffleInterval is active...
 			  // Stop shuffling
-			  clearInterval(shuffleInterval); // https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval
-			  shuffleInterval = null;
-			  shuffleButton.textContent = "Start Shuffling"; // change text
+			  clearInterval(blockInterval); // https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval
+			  blockInterval = null;
+			  shuffleButton.textContent = "Start Shuffling Blocks"; // change text
 			} else {
 			  // Start shuffling
-			  shuffleInterval = setInterval(shuffleBlocks, 3000);
-			  shuffleButton.textContent = "Stop Shuffling";
+			  blockInterval = setInterval(shuffleBlocks, 1500);
+			  shuffleButton.textContent = "Stop Shuffling Blocks";
 			}
 		  });
 
@@ -334,11 +334,11 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		// https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver
 		// https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/isIntersecting
 		let observer = new IntersectionObserver((entries) => {
-		entries.forEach(entry => {
-			if (entry.isIntersecting) {
-			entry.target.classList.add('unblur');
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+				entry.target.classList.add('unblur');
 			} else {
-			entry.target.classList.remove('unblur');
+				entry.target.classList.remove('unblur');
 			}
 		});
 		}, { threshold: 0.5 }); // unblurs at 50%
@@ -346,4 +346,38 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 		document.querySelectorAll('.block').forEach(block => {
 		observer.observe(block);
 		});
+
+		// change block container to have different grid class so we can change grid layout
+		let gridLayouts = ['original-grid', 'grid-two', 'grid-three']
+
+		let changeGridlayout = () => {
+			let container = document.getElementById('channel-blocks');
+			gridLayouts.forEach(layout => container.classList.remove(layout));
+
+			let randomLayout = gridLayouts[Math.floor(Math.random() * gridLayouts.length)];
+
+			container.classList.add(randomLayout);
+		}
+
+		let layoutInterval = setInterval(changeGridlayout, 1500);
+		let layoutButton = document.getElementById('layout-shuffle');
+
+		layoutButton.addEventListener('click', () => {
+			if (layoutInterval) {
+			  clearInterval(layoutInterval);
+			  layoutInterval = null;
+			  layoutButton.textContent = "Start Shuffling Layouts";
+			} else {
+			  layoutInterval = setInterval(changeGridlayout, 1500);
+			  layoutButton.textContent = "Stop Shuffling Layouts";
+			}
+		  });
+
+		// Toggle Blur 
+		  document.getElementById('toggle-blur').addEventListener('click', () => {
+			const blocks = document.querySelectorAll('.block');
+			blocks.forEach(block => {
+			  block.classList.toggle('blur');
+			});
+		  });
 	});
