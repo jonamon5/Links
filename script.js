@@ -22,35 +22,58 @@ for (let r = 0; r < rows; r++) {
 
 		// add in black or white coloring to cells
 		let isBlack = (r + c) % 2 === 0; //if row and column are even...
-		cell.style.backgroundColor = isBlack ? "black" : "darkgrey"; 
+		cell.style.backgroundColor = isBlack ? "black" : "darkgrey";
 		// then background color is black, if not then white - love ternary statements 
 
 		// store that reference to the cell
 		cells[r][c] = cell;
 
-		// desktop
+		// Desktop
 		cell.addEventListener("mouseover", () => {
-		  toggleCell(r, c);
+			toggleCell(r, c);
 
-		//   toggle cell to the right
-		  if (c < cols - 1) {
-			toggleCell(r, c + 1);
-		  }
+			//   toggle cell to the right
+			if (c < cols - 1) {
+				toggleCell(r, c + 1);
+			}
 
-		//   toggle cell to the left 
-		  if (c > 0) {
-			toggleCell(r, c - 1);
-		  }
+			//   toggle cell to the left 
+			if (c > 0) {
+				toggleCell(r, c - 1);
+			}
 
 		});
 
-		// mobile - not working
+		// Mobile
 		cell.addEventListener("touchstart", (event) => {
-		event.preventDefault();
-		  toggleCell(r, c);
-		  console.log("drag")
+			event.preventDefault();
+			if (c < cols - 1) {
+				toggleCell(r, c + 1);
+			}
+			if (c > 0) {
+				toggleCell(r, c - 1);
+			}
 		});
 
+		cell.addEventListener("touchmove", (event) => {
+			event.preventDefault();
+			if (c < cols - 1) {
+				toggleCell(r, c + 1);
+			}
+			if (c > 0) {
+				toggleCell(r, c - 1);
+			}
+		});
+
+		cell.addEventListener("touchend", (event) => {
+			event.preventDefault();
+			if (c < cols - 1) {
+				toggleCell(r, c + 1);
+			}
+			if (c > 0) {
+				toggleCell(r, c - 1);
+			}
+		});
 
 		// add this to the checkerboard
 		checkerboard.appendChild(cell);
@@ -61,7 +84,7 @@ for (let r = 0; r < rows; r++) {
 // https://stackoverflow.com/questions/1484506/random-color-generator/1484514#1484514
 function getRandomColor() {
 	return 'hsla(' + (Math.random() * 360) + ', 50%, 50%, 1)';
-  }
+}
 
 
 function toggleCell(row, col) {

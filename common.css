@@ -1,6 +1,10 @@
 :root {
 	--off-white: #dcdcdc;
+	--dark-red: #8b0000;
+	--dark-green: #006400;
+	--transition: .8s ease-in-out;
 }
+
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	background: #1c1c1c;

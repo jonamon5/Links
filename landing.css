@@ -1,7 +1,3 @@
-:root {
-	--off-white: #dcdcdc;
-}
-
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	color: var(--off-white);
@@ -54,7 +50,7 @@ body {
 	margin-bottom: 1rem;
 	position: relative;
 	cursor: default;
-	transition: 1s ease-in-out;
+	transition: var(--transition);
 	text-shadow: black 0px 0 30px;
 	color: white;
 	pointer-events: auto;
@@ -63,8 +59,7 @@ body {
 .header-title span {
 	display: inline-block;
 	transition: transform, opacity, filter;
-	transition-duration: 1s;
-	transition-timing-function: ease-in-out
+	transition: var(--transition);
 }
 
 .not {
@@ -72,7 +67,7 @@ body {
 	opacity: 0;
 	filter: blur(5px);
 	font-family: velzyland;
-	transition: 500ms ease-in-out;
+	transition: var(--transition);
 }
 
 /* move left */
@@ -89,8 +84,8 @@ body {
 .header-title:hover .not {
 	opacity: 1;
 	filter: blur(0);
-	color: darkred;
-	transition: 500ms ease;
+	color: var(--dark-red);
+	transition: var(--transition);
 }
 
 .header-description {
@@ -120,7 +115,7 @@ body {
 	padding-left: 4rem;
 	padding-right: 4rem;
 	border-radius: .5rem;
-	transition: .5s ease;
+	transition: var(--transition);
 	/* border: 2px solid black; */
 }
 
@@ -131,11 +126,11 @@ body {
 }
 
 .enter-button {
-	color: darkgreen;
+	color: var(--dark-green);
 }
 
 .leave-button {
-	color: darkred;
+	color: var(--dark-red);
 }
 
 .enter-button:hover, .leave-button:hover {
@@ -146,11 +141,11 @@ body {
 }
 
 .leave-button:hover {
-	color: darkred;
+	color: var(--dark-red);
 }
 
 .enter-button:hover {
-	color: darkgreen;
+	color: #006400;
 }
 
 /* CHECKERBOARD */
@@ -198,7 +193,7 @@ body {
 		font-size: 2.5rem;
 		opacity: 1;
 		filter: blur(0);
-		color: darkred;
+		color: var(--dark-red);
 	}
 	.seeing {
 		transform: translateX(-1rem);
