@@ -314,10 +314,10 @@ dialog#modal::backdrop {
 		gap: 1rem;
 	}
 
-	.block.unblur {
+	/* .block.unblur {
 		filter: none;
 		transition: 1s ease-in-out;
-	  }
+	  } */
 
 	  .block { 
 		transition: none;
