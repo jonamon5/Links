@@ -35,7 +35,7 @@ let renderBlock = (block) => {
 	// Links!
 	if (block.class == 'Link') {
 		let linkItem =
-		`
+			`
 			<div class="block" id="block-${block.id}">
 		  	<img src="${block.image.original.url}">
 			</div>
@@ -49,11 +49,11 @@ let renderBlock = (block) => {
 			<div class = "modal-container" > 
 				<img src="${block.image.original.url}" alt="${block.title}">
 				<h2 class="modal-title">${block.title}</h2>
-				<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
+				<p class="modal-desc">${(block.description) ? block.description : "No Description Provided"}</p> 
 			</div>
 			`;
 			document.getElementById('modal').showModal(); //showModal is built in dialog element
-			
+
 		});
 	}
 
@@ -78,12 +78,12 @@ let renderBlock = (block) => {
 			<div class = "modal-container" > 
 				<img src="${block.image.original.url}" alt="${block.title}">
 				<h2 class="modal-title">${block.title}</h2>
-				<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
+				<p class="modal-desc">${(block.description) ? block.description : "No Description Provided"}</p> 
 			</div>
 			`;
 			document.getElementById('modal').showModal(); //showModal is built in dialog element
-			
-		  });
+
+		});
 	}
 
 
@@ -99,7 +99,7 @@ let renderBlock = (block) => {
 
 		document.getElementById(`block-${block.id}`).addEventListener('click', () => {
 			let modalContent = document.getElementById('modal-content');
-			modalContent.innerHTML = ''; 
+			modalContent.innerHTML = '';
 
 			modalContent.innerHTML = `
 			<div class = "modal-container" >
@@ -109,7 +109,7 @@ let renderBlock = (block) => {
 			</div>
 			`;
 			console.log("video", block)
-			document.getElementById('modal').showModal(); 
+			document.getElementById('modal').showModal();
 		});
 
 	}
@@ -131,46 +131,46 @@ let renderBlock = (block) => {
 
 			document.getElementById(`block-${block.id}`).addEventListener('click', () => {
 				let modalContent = document.getElementById('modal-content');
-				modalContent.innerHTML = ''; 
+				modalContent.innerHTML = '';
 
 				modalContent.innerHTML = `
 				<div class = "modal-container" > 
 					<video autoplay muted src="${block.attachment.url}"></video>
 					<h2 class="modal-title">${block.title}</h2>
-					<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
+					<p class="modal-desc">${(block.description) ? block.description : "No Description Provided"}</p> 
 				</div>
 				`;
 				console.log("video", block)
-				document.getElementById('modal').showModal(); 
+				document.getElementById('modal').showModal();
 			});
 		}
 
 		// Uploaded PDFs!
 		else if (attachment.includes('pdf')) {
 			let pdfItem =
-			`
+				`
 			<div class="block" id="block-${block.id}">
 				<img src="${block.image.original.url}">
 			</div>
 			`
-		channelBlocks.insertAdjacentHTML('beforeend', pdfItem)
+			channelBlocks.insertAdjacentHTML('beforeend', pdfItem)
 
-		document.getElementById(`block-${block.id}`).addEventListener('click', () => {
-			let modalContent = document.getElementById('modal-content');
-			modalContent.innerHTML = ''; 
+			document.getElementById(`block-${block.id}`).addEventListener('click', () => {
+				let modalContent = document.getElementById('modal-content');
+				modalContent.innerHTML = '';
 
-			modalContent.innerHTML = `
+				modalContent.innerHTML = `
 			<div class = "modal-container" > 
 				<img src="${block.image.original.url}">
 				<h2><a href="${block.attachment.url}"> ${block.title} ↗</a></h2>
-				<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
+				<p class="modal-desc">${(block.description) ? block.description : "No Description Provided"}</p> 
 
 
 			</div>
 			`;
-			console.log("pdf", block)
-			document.getElementById('modal').showModal(); 
-		});
+				console.log("pdf", block)
+				document.getElementById('modal').showModal();
+			});
 
 		}
 
@@ -186,24 +186,24 @@ let renderBlock = (block) => {
 
 			document.getElementById(`block-${block.id}`).addEventListener('click', () => {
 				let modalContent = document.getElementById('modal-content');
-				modalContent.innerHTML = ''; 
+				modalContent.innerHTML = '';
 				modalContent.innerHTML = `
 				<div class = "modal-container" > 
 					<audio controls autoplay src="${block.attachment.url}"></audio>
 					<h2 class="modal-title">${block.title}</h2>
-					<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
+					<p class="modal-desc">${(block.description) ? block.description : "No Description Provided"}</p> 
 				</div>
 				`;
-				document.getElementById('modal').showModal(); 
+				document.getElementById('modal').showModal();
 
 				// closing the modal with pause the music - don't want sound continuing playing after close 
-				document.getElementById('modal').addEventListener('cancel', function() {
+				document.getElementById('modal').addEventListener('cancel', function () {
 					let sound = this.querySelectorAll('audio');
 					sound.forEach(audio => {
-					  audio.pause();
-					  audio.currentTime = 0; // reset audio to beginning
+						audio.pause();
+						audio.currentTime = 0; // reset audio to beginning
 					});
-				  });
+				});
 			});
 		}
 	}
@@ -225,17 +225,17 @@ let renderBlock = (block) => {
 			// video modal 
 			document.getElementById(`block-${block.id}`).addEventListener('click', () => {
 				let modalContent = document.getElementById('modal-content');
-				modalContent.innerHTML = ''; 
+				modalContent.innerHTML = '';
 
 				modalContent.innerHTML = `
 				<div class = "modal-container" > 
 					${block.embed.html}
 					<h2 class="modal-title">${block.title}</h2>
-					<p class="modal-desc">${ (block.description) ? block.description : "No Description Provided" }</p> 
+					<p class="modal-desc">${(block.description) ? block.description : "No Description Provided"}</p> 
 				</div>
 				`;
 				console.log("video", block)
-				document.getElementById('modal').showModal(); 
+				document.getElementById('modal').showModal();
 			});
 		}
 
@@ -265,25 +265,8 @@ let renderUser = (user) => { // You can have multiple arguments for a function!
 			<p><a href="https://are.na/${user.slug}"> ${user.first_name} Arena Profile ↗</a></p>
 		</address>
 		`
-		footer.insertAdjacentHTML('beforeend', userAddress)
+	footer.insertAdjacentHTML('beforeend', userAddress)
 }
-
-// function for shuffle blocks randomly
-let shuffleBlocks = () => {
-	let container = document.getElementById('channel-blocks');
-
-	// grab all blocks inside the channel-blocks container - https://developer.mozilla.org/en-US/docs/Web/API/Element/children
-	let children = container.children
-
-	// turn blocks into array to shuffe - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
-	let blocks = Array.from(children);
-
-	// sort blocks randomly - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-	blocks.sort(() => Math.random() - 0.5);
-
-	// for each block in the array, move block to the end of the array - sorting will ensure all blocks move around
-	blocks.forEach(block => container.appendChild(block));
-  }
 
 // Now that we have said what we can do, go get the data:
 fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-store' })
@@ -294,110 +277,141 @@ fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-stor
 
 		data.contents.reverse().forEach((block) => {
 			renderBlock(block); // Render each block
-		  });
+		});
 
 		// Also display the owner and collaborators:
 		let channelUsers = document.getElementById('channel-users') // Show them together
 		data.collaborators.forEach((collaborator) => renderUser(collaborator, channelUsers))
 		renderUser(data.user, channelUsers)
 
-		// shuffle the blocks every X seconds
-		let blockInterval = setInterval(shuffleBlocks, 1500);
+
+		// function for shuffle blocks randomly
+		let shuffleBlocks = () => {
+			let container = document.getElementById('channel-blocks');
+
+			container.style.transition = "opacity 0.5s ease";
+			container.style.opacity = "0";
+
+			setTimeout(() => {
+				// turn blocks into array to shuffe - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+				let blocks = Array.from(container.children);
+
+				// sort blocks randomly - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+				blocks.sort(() => Math.random() - 0.5);
+
+				// for each block in the array, move block to the end of the array - sorting will ensure all blocks move around
+				blocks.forEach(block => container.appendChild(block));
+
+				container.style.opacity = "1";
+
+			}, 500)
+		}
+
+		let blockInterval = setInterval(shuffleBlocks, 3000); //shuffle blocks every x seconds
 		let shuffleButton = document.getElementById('block-shuffle');
 
+		// Shuffle block button
 		shuffleButton.addEventListener('click', () => {
 			if (blockInterval) { // if shuffleInterval is active...
-			  // Stop shuffling
-			  clearInterval(blockInterval); // https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval
-			  blockInterval = null;
-			  shuffleButton.textContent = "⬛ Start Shuffling Blocks"; // change text
-			  shuffleButton.style.color = "darkgreen";
+				// Stop shuffling
+				clearInterval(blockInterval); // https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval
+				blockInterval = null;
+				shuffleButton.textContent = "⬛ Start Shuffling Blocks"; // change text
+				shuffleButton.style.color = "darkgreen";
 			} else {
-			  // Start shuffling
-			  blockInterval = setInterval(shuffleBlocks, 1500);
-			  shuffleButton.textContent = "⬛ Stop Shuffling Blocks";
-			  shuffleButton.style.color = "darkred";
+				// Start shuffling
+				blockInterval = setInterval(shuffleBlocks, 1500);
+				shuffleButton.textContent = "⬛ Stop Shuffling Blocks";
+				shuffleButton.style.color = "darkred";
 			}
-		  });
-
-		// close modal function
-		document.getElementById('close-modal').addEventListener('click', () => {
-			document.getElementById('modal').close();
-		});
-		
-		// Unblur on mobile visible function
-		// https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver
-		// https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/isIntersecting
-		let observer = new IntersectionObserver((entries) => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting) {
-				entry.target.classList.add('unblur');
-			} else {
-				entry.target.classList.remove('unblur');
-			}
-		});
-		}, { threshold: 0.5 }); // unblurs at 50%
-
-		document.querySelectorAll('.block').forEach(block => {
-		observer.observe(block);
 		});
 
 		// change block container to have different grid class so we can change grid layout - mobile and desktop
 		let gridLayouts = []; //gridLayout empty array at first - populate later 
 
-		if (window.innerWidth <= 700 ){
-			gridLayouts = ['mobile-grid', 'mobile-grid-two']  
+		if (window.innerWidth <= 700) {
+			gridLayouts = ['mobile-grid', 'mobile-grid-two']
 		} else {
 			gridLayouts = ['original-grid', 'grid-two', 'grid-three']
 		}
+
+		let index = 0; //initialize index at 0, will be looping through this to change layouts. Having random layout sometimes produces duplicates layouts that don't look good 
 
 		// change grid layout function
 		let changeGridlayout = () => {
 			let container = document.getElementById('channel-blocks'); //grab block container
 
-			gridLayouts.forEach(layout => container.classList.remove(layout)); //remove class for each block 
+			container.style.transition = "opacity 0.5s ease";
+			container.style.opacity = "0";
 
-			let randomLayout = gridLayouts[Math.floor(Math.random() * gridLayouts.length)]; //pick a random layout of the 3...can be more but have to add more grid classes to css
+			setTimeout(() => {
+				gridLayouts.forEach(layout => container.classList.remove(layout)); //remove class for each block
 
-			// letMobilerandom = randomLayout.toggle();
+				container.classList.add(gridLayouts[index]); // add the gridLayouts for that specific index (1,2 or 3)
 
-			container.classList.add(randomLayout); //add that class back in
+				index = (index + 1) % gridLayouts.length; // increment index 
+
+				// container.classList.add(randomLayout);
+				container.style.opacity = "1";
+			}, 500);
 		}
 
-		let layoutInterval = setInterval(changeGridlayout, 1500); //change layout every 1.5s
+		let layoutInterval = setInterval(changeGridlayout, 6000); //change layout every 1.5s
 		let layoutButton = document.getElementById('layout-shuffle');
 
 		// change grid layout button - same as shuffleButton function
 		layoutButton.addEventListener('click', () => {
 			if (layoutInterval) {
-			  clearInterval(layoutInterval);
-			  layoutInterval = null;
-			  layoutButton.textContent = "🔲 Start Shuffling Layouts";
-			  layoutButton.style.color = "darkgreen"
+				clearInterval(layoutInterval);
+				layoutInterval = null;
+				layoutButton.textContent = "🔲 Start Shuffling Layouts";
+				layoutButton.style.color = "darkgreen"
 			} else {
-			  layoutInterval = setInterval(changeGridlayout, 1500);
-			  layoutButton.textContent = "🔲 Stop Shuffling Layouts";
-			  layoutButton.style.color = "darkred"
+				layoutInterval = setInterval(changeGridlayout, 1500);
+				layoutButton.textContent = "🔲 Stop Shuffling Layouts";
+				layoutButton.style.color = "darkred"
 			}
-		  });
+		});
 
 		// Toggle Blur button
 		let blurButton = document.getElementById('toggle-blur');
 		let blurActive = false;
 
 		blurButton.addEventListener('click', () => {
-			if (blurActive) {				
+			if (blurActive) {
 				document.querySelectorAll('.block').forEach(block => {
 					block.classList.remove('blur');
-			});
-			blurActive = false;
-			blurButton.textContent = "👓 Remove Blur";
+				});
+				blurActive = false;
+				blurButton.textContent = "👓 Remove Blur";
 			} else {
 				document.querySelectorAll('.block').forEach(block => {
 					block.classList.add('blur');
-			});
-			blurActive = true;
-			blurButton.textContent = "🕶️ Add Blur";
-		  };
+				});
+				blurActive = true;
+				blurButton.textContent = "🕶️ Overlay Blur";
+			};
 		})
+
+		// close modal function
+		document.getElementById('close-modal').addEventListener('click', () => {
+			document.getElementById('modal').close();
+		});
+
+		// Unblur on mobile visible function
+		// https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver
+		// https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/isIntersecting
+		let observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('unblur');
+				} else {
+					entry.target.classList.remove('unblur');
+				}
+			});
+		}, { threshold: 0.5 }); // unblurs at 50%
+
+		document.querySelectorAll('.block').forEach(block => {
+			observer.observe(block);
+		});
 	});

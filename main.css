@@ -45,10 +45,15 @@ button {
 }
 
 .desktop-nav ul li:hover {
-	background-color: transparent;
+	background-color: rgb(255 255 255 / 30%);
+	backdrop-filter: blur(10px);
 	color: white;
 	transition: var(--transition);
 	border: 2px solid white;
+}
+
+#block-shuffle, #layout-shuffle {
+	color: darkred;
 }
 
 img {

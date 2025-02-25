@@ -140,7 +140,8 @@ body {
 
 .enter-button:hover, .leave-button:hover {
 	border: 3px solid lightgray;
-	background-color: transparent;
+	background-color: rgb(255 255 255 / 30%);
+  	backdrop-filter: blur(10px);
 	color: black;
 }
 

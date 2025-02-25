@@ -2,7 +2,7 @@
 let checkerboard = document.getElementById("checkerboard");
 let rows = 20;
 let cols = 20;
-let threshold = 1; // How many times we want to switch before it stops switching
+let threshold = 2; // How many times we want to switch before it stops switching
 let cells = []; // single checkerboard cell
 let count = []; // How many times its been interacted with 
 
@@ -31,10 +31,20 @@ for (let r = 0; r < rows; r++) {
 		// desktop
 		cell.addEventListener("mouseover", () => {
 		  toggleCell(r, c);
-		  console.log("mouseover")
+
+		//   toggle cell to the right
+		  if (c < cols - 1) {
+			toggleCell(r, c + 1);
+		  }
+
+		//   toggle cell to the left 
+		  if (c > 0) {
+			toggleCell(r, c - 1);
+		  }
+
 		});
 
-		// mobile
+		// mobile - not working
 		cell.addEventListener("touchstart", (event) => {
 		event.preventDefault();
 		  toggleCell(r, c);
@@ -48,21 +58,20 @@ for (let r = 0; r < rows; r++) {
 	console.log("checkerboard function worked")
 }
 
+// https://stackoverflow.com/questions/1484506/random-color-generator/1484514#1484514
+function getRandomColor() {
+	return 'hsla(' + (Math.random() * 360) + ', 50%, 50%, 1)';
+  }
+
 
 function toggleCell(row, col) {
-	let cell = cells[row][col]; //create cell
-	let currentColor = cell.style.backgroundColor; //create current color 
+	let cell = cells[row][col]; //create cell with the specific cell
 
-	if (currentColor === "black") {
-	  cell.style.backgroundColor = "white";
-	} else if (currentColor === "white") {
-	  cell.style.backgroundColor = "black";
+	count[row][col]++; // increment count
+
+	if (count[row][col] < threshold) {
+		cell.style.backgroundColor = getRandomColor();
+	} else {
+		cell.style.backgroundColor = "transparent";
 	}
-  
-	count[row][col]++; // increase toggle count by 1;
-  
-	// if count is more than the threshold set earlier, become transparent
-	if (count[row][col] >= threshold) {
-	  cell.style.backgroundColor = "transparent";
-	}
-  }
+}
