@@ -47,32 +47,14 @@ for (let r = 0; r < rows; r++) {
 		// Mobile
 		cell.addEventListener("touchstart", (event) => {
 			event.preventDefault();
-			if (c < cols - 1) {
-				toggleCell(r, c + 1);
-			}
-			if (c > 0) {
-				toggleCell(r, c - 1);
-			}
+			toggleCell(r, c);
+			console.log("touchstart toggled cell", r, c);
 		});
 
 		cell.addEventListener("touchmove", (event) => {
 			event.preventDefault();
-			if (c < cols - 1) {
-				toggleCell(r, c + 1);
-			}
-			if (c > 0) {
-				toggleCell(r, c - 1);
-			}
-		});
-
-		cell.addEventListener("touchend", (event) => {
-			event.preventDefault();
-			if (c < cols - 1) {
-				toggleCell(r, c + 1);
-			}
-			if (c > 0) {
-				toggleCell(r, c - 1);
-			}
+				toggleCell(r, c);
+				console.log("touchmove toggled cell", r, c);
 		});
 
 		// add this to the checkerboard
